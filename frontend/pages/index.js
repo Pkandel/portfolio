@@ -1,11 +1,9 @@
 import { Component } from 'react';
 import axios from 'axios';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Layout } from '../component';
 
 class Root extends Component {
     render() {
-        return  <Layout />
+        return <div> This is the actual portfolio frontend. To build your portfolio go to <a href="/admin">Admin </a> section.</div>
     }
 }
 export default Root;

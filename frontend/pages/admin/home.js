@@ -1,10 +1,10 @@
 import { Component } from 'react';
-import { Form, Icon, Input, Button, Upload } from 'antd';
 import { Layout } from '../../component/common/admin';
 import { bindActionCreators } from 'redux'
 import withRedux from 'next-redux-wrapper'
 import { store } from '../../redux/store';
 import  * as layoutActions  from '../../redux/actions/layout';
+import { Form, Icon, Input, Button, Upload } from 'antd';
 const FormItem = Form.Item;
 const { TextArea } = Input;
 

@@ -1,45 +1,26 @@
 import { Component } from 'react';
+import withRedux from 'next-redux-wrapper'
+import { store } from '../../redux/store';
+import * as layoutActions from '../../redux/actions/layout'
 import axios from 'axios';
 import { Layout } from '../../component';
 class Root extends Component {
     static async getInitialProps() {
-        const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
-        const posts = res.data;
-        if (posts) {
-            return { posts }
-        } else {
-            return { posts: [] }
-        }
+       
     }
     constructor(props) {
         super(props);
-        const posts = this.props.posts;
-        this.state= { 
-            posts: posts,
-        }
 
     }
     render() {
-        const Posts = () => {
-                return this.props.posts.map(({ id, title, body }) => (
-                    <div key={id}>
-                        <h2>{title}</h2>
-                        <p>{body}</p>
-                    </div>
-                ))
-        };
-
         return (
-            <div>
-                <Layout />
-                <div className="container">
+                <Layout >
                     <div>
-                </div>
-                    <Posts />
-                </div>
-
-            </div>
+                        Welcome to the admin cite where you can create your portfolio
+                    </div>
+                </Layout>
+               
         );
     }
 }
-export default Root;
+export default withRedux(store, null, null)(Root);

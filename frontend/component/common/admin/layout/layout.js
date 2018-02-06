@@ -13,7 +13,8 @@ class Layout extends Component {
         super(props);
         this.state = {
             collapsed: this.props.layout.collapsed,
-            selectedRoute: undefined
+            selectedRoute: undefined,
+
         }
     }
     toggle = () => {
@@ -88,11 +89,6 @@ class Layout extends Component {
           </Header>
                     <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', overflow:'initial'}}>
                         {this.props.children}
-                        <hr />
-                        <h2>Debug Area</h2>
-               <pre>
-                 {JSON.stringify(this.state, null, 5)}
-                </pre> 
                     </Content>
                 </AppLayout>
                 <style jsx> {layoutStyle} </style>
