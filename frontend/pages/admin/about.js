@@ -1,116 +1,92 @@
 import { Component } from 'react';
-import { Layout } from '../../component/common/admin';
+import { Layout, Skill } from '../../component/common/admin';
 import { bindActionCreators } from 'redux'
 import withRedux from 'next-redux-wrapper'
 import { store } from '../../redux/store';
 import * as layoutActions from '../../redux/actions/layout';
-import { Debug } from '../../component'
+import { Debug } from '../../component';
+import _ from 'lodash';
 import { Form, Input, Tabs, Icon, Button, Layout as AppLayout, Collapse, DatePicker, Checkbox } from 'antd';
-const FormItem =
-    Form.Item, TabPane = Tabs.TabPane,
+// import { Form, Input, Tabs, Icon, Button, Layout as AppLayout, Collapse, DatePicker, Checkbox } from 'antd-mobile';
+
+const FormItem = Form.Item,
+    TabPane = Tabs.TabPane,
     { TextArea } = Input,
     { Footer } = AppLayout,
     Panel = Collapse.Panel,
-    { RangePicker,  } = DatePicker;
+    { RangePicker, } = DatePicker;
 class About extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            addSkill: 1,
-            stillWorking: false,
+            id: 0,
+            addSkill: 0,
             activeTab: 1,
             disablePrev: true,
-            disableNext: false
+            disableNext: false,
+            SkillArray: [],
         };
+    }
+
+    componentDidMount() {
+        const SkillArray = [...this.state.SkillArray];
+        SkillArray.push({data: {}, id: ++this.state.id });
+        this.setState({
+            SkillArray
+        })
     }
     handleSubmit = () => {
         console.log('Form submitted')
     }
+
+
     handleSkillAdd = () => {
+      const SkillArray = [ ...this.state.SkillArray ];
+        SkillArray.push({data: {}, id: ++this.state.id })
         this.setState({
-            addSkill: this.state.addSkill + 1
+            SkillArray
         })
     }
-     onDateChange = (date, dateString) => {
-        console.log(date, dateString);
-      }
-      handleChange = (e) => {
-          const { name, value } = e.target;
-        this.setState({
-            [name]: value
-        })
-      }
+    onDateChange = (date, dateString) => {
+        // console.log(date, dateString);
+    }
+    handleChange = (e, index) => {
+       
+    }
 
-       checkDisable = () => {
+    checkDisable = () => {
         setTimeout(() => {
             this.setState({
                 disablePrev: this.state.activeTab === 1 ? true : false,
                 disableNext: this.state.activeTab === 3 ? true : false
             })
         }, 0);
-      }
-      handleTabClick = (number) => {
-          this.setState({
-              activeTab: Number(number)
-          })
-          this.checkDisable();
-      }
-      handleNavigation = (navigateTo) => {
+    }
+    handleTabClick = (number) => {
+        this.setState({
+            activeTab: Number(number)
+        })
+        this.checkDisable();
+    }
+    handleNavigation = (navigateTo) => {
         this.setState({
             activeTab: navigateTo === "prev" ? this.state.activeTab - 1 : this.state.activeTab + 1,
         })
         this.checkDisable();
-      }
+    }
+
+    handleRemove = (key) => {
+        let SkillArray = this.state.SkillArray;
+        SkillArray = SkillArray.filter(({id}) => id !== key );
+        this.setState({ SkillArray });
+    }
     render() {
-        const { addSkill, stillWorking, activeTab, disablePrev, disableNext } = this.state
-        const Skill = (number) => { 
-               return ( <Collapse defaultActiveKey={[`${addSkill}`]}>
-                        <Panel header={`Experience ${number}`} key={number}>
-                            <Form className="login-form" onSubmit={this.handleSubmit} >
-                                <FormItem>
-                                    <Input
-                                        placeholder="Office URL"
-                                        size="large"
-                                        addonAfter={"*"}
-                                    />
-                                </FormItem>
-                                <FormItem>
-                                    <Input
-                                        placeholder="Job Title (Javascript Developer)"
-                                        size="large"
-                                        addonAfter={"*"}
-                                    />
-                                </FormItem>
-                                <FormItem>
-                                    { stillWorking 
-                                    ? <DatePicker placeholder="Start Date" /> 
-                                    : <RangePicker onChange={this.onDateChange} /> 
-                                    }
-                                    <div className="right">
-                                        <Checkbox onChange={this.handleChange} name="stillWorking" value={!stillWorking}>Still Working </Checkbox>
-                                    </div>
-                                </FormItem>
-                                <FormItem>
-                                    <TextArea
-                                        placeholder="Role Description"
-                                        rows={4}
-    
-                                    />
-                                </FormItem>
-                            </Form>
-                        </Panel>
-                    </Collapse> )};
-
-        const SkillArray = [];
-        for(let i=1; i<= addSkill; i++){
-            SkillArray.push(Skill(i));
-        };
-
+        const { addSkill, stillWorking, activeTab, disablePrev, disableNext, SkillArray } = this.state;
         return (
             <Layout>
-                <Tabs activeKey={`${activeTab}`} onTabClick={this.handleTabClick}>
+                <Tabs activeKey={`${activeTab}`} onTabClick={this.handleTabClick} >
                     <TabPane tab={<span><Icon type="apple" />Experience</span>} key="1" >
-                        { SkillArray.map((skill, key) => <div key={key}>{skill}</div>) }
+                        {SkillArray.map(({ data, id }) => <Skill key={id} id={id} handleRemove={this.handleRemove} />)}
                         <div className="center">
                             <Button type="default" onClick={this.handleSkillAdd}>Add More <Icon type="plus-circle-o" /></Button>
                         </div>
@@ -122,7 +98,6 @@ class About extends Component {
                         Add Your Skills
                     </TabPane>
                 </Tabs>
-
                 <Footer style={{ textAlign: 'center', padding: '15px 40px 45px 40px' }}>
                     <div className="left">
                         <Button type="default" onClick={() => this.handleNavigation('prev')} disabled={disablePrev}><Icon type="left" />Prev</Button>
@@ -144,7 +119,7 @@ class About extends Component {
                     margin: 10px;
                 }
                 `}</style>
-                <Debug state={this.state} name="About"/>
+                <Debug state={this.state} name="About" />
             </Layout>
         );
     }

@@ -15,14 +15,29 @@ export default css`
  :global( .trigger ){
     font-size: 18px;
     line-height: 64px;
-    padding: 0 24px;
+    // padding: 0 24px;
+    padding-left: 20px;
     cursor: pointer;
     transition: color .3s;
     float: left;
 
   }
+  :global(.anticon-menu-fold) {
+      line-height: 0px !important;
+      padding-top: 25px !important;
+  }
+  :global( .anticon-menu-unfold) {
+    line-height: 0px !important;
+    padding-top: 25px !important;
+  }
   :global(.trigger:hover) {
     color: #1890ff;
+  }
+  :global(ant-layout-sider.ant-layout-sider-collapsed){
+      minWidth: 0;
+      width: 0;
+      maxWidth: 0;
+      flex: 0;
   }
   :global(.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected){
       border-right: 5px solid white;

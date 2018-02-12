@@ -4,7 +4,9 @@ export  const Debug = ({ state, name}) => {
         <hr />
         <h2>Debug Area for {name}</h2>
         <pre>
-            {JSON.stringify(state, null, 2)}
+           <code>
+           {JSON.stringify(state, null, 2)}
+          </code> 
         </pre>
     </div>
 )

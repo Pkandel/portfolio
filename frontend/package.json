@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "antd": "^3.2.0",
+    "antd-mobile": "^2.1.6",
     "axios": "^0.17.1",
     "css-loader": "^0.28.9",
     "material-ui": "^0.20.0",
@@ -28,9 +29,10 @@
     "babel-preset-react": "^6.24.1"
   },
   "scripts": {
-    "dev": "next",
+    "dev": "next --host 0.0.0.0",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --host 0.0.0.0",
+    "debug":"next --host 0.0.0.0 --inspect",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
