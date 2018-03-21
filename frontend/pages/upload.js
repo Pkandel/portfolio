@@ -1,1 +1,0 @@
-export default () => <div>Upload an Image</div>
