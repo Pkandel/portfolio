@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 
 import { BrowserRouter } from 'react-router-dom';
+import { Layout } from './containers';
 class Root extends Component {
-  render () {
-    return (
-      <BrowserRouter>
-        <h1> React Redux Boilerplate
-          {JSON.stringify(process.env)}
-        </h1>
-      </BrowserRouter>
-    );
-  }
+	render () {
+		return (
+			<BrowserRouter>
+				<Layout />
+			</BrowserRouter>
+		);
+	}
 }
 
 export default Root;
