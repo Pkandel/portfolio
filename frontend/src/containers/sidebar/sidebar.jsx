@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 const { Item } = Menu;
 const { Sider } = Layout;
+import './sidebar.scss';
 class Sidebar extends Component {
 	render() {
 		const collapsed = this.props.collapsible;
