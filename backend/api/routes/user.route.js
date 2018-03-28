@@ -4,7 +4,7 @@ import * as User from '../controllers/userController';
 const router = express.Router();
 router.route('/')
   .get(User.list);
-router.route('/save')
+router.route('/')
   .post(User.save);
 router.route('/:id')
   .get(User.findOne);

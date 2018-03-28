@@ -8,14 +8,12 @@ function list(req, res) {
       return res.status(400).json({
         type: 'error',
         message: 'Error Fetching User',
-        res,
       });
     }
     if (users.length === 0) {
-      return this.Success({
+      return res.status(400).json({
         data: null,
         message: 'no user in database',
-        res,
       });
     }
     return res.json({
@@ -28,15 +26,12 @@ function list(req, res) {
 
 // save user to the database
 function save(req, res) {
-  console.log(req.body.name);
-  if (req.body.name === undefined) {
-    return res.json({
-      status: 'error',
-      message: 'can not get user name',
-    });
-  }
+  const { username, email, name } = req.body;
   const user = new User({
-    name: req.body.name,
+    username,
+    email,
+    name,
+
   });
 
   user.save((err) => {

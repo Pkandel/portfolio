@@ -8,21 +8,17 @@ import config from './config';
 import routes from './routes';
 
 const app = express();
-const tryarray = ['hello', 'hi', 'namaste', 'onemore'];
-console.clear();
-console.log(tryarray);
-
-const mongoUri = config.mongo.host;
-mongoose.connect(mongoUri, { server: { socketOptions: { keepAlive: 1 } } });
-mongoose.connection.on('error', () => {
-  throw new Error(`unable to connect to database: ${mongoUri}`);
-});
-
 // parse body params and attach them to req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '../public')));
 
+const mongoUri = config.mongo.host;
+mongoose.connect(mongoUri, { keepAlive: 120 , useMongoClient: true }, (err) => {
+    if(err) throw err;
+    console.log(`MongoDb is running on ${mongoUri}`)
+});
+
+app.use(express.static(path.join(__dirname, '../public')));
 if (config.env === 'development') {
   app.use(logger('dev'));
 }

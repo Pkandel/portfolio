@@ -37,3 +37,17 @@
 #### Urls
  * http://localhost:8000/api - backend url 
  * http://localhost:8000/spec/ -swagger api
+
+## ToDo
+#### Back End
+* Write all the validation in models
+* Write all the save and list message 
+* Write Swagger file for all Controller
+* Delete unwanted file
+* Protect all the route without login 
+* Write ToDo for blog and note 
+* Run with Docker
+* Set up Jenkins CLI
+
+#### Front End
+* Write all the pages that fetch Data

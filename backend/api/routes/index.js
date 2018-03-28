@@ -1,5 +1,10 @@
 import express from 'express';
 import userRoutes from './user.route';
+import aboutRoutes from './about.route';
+import educationRoutes from './education.route';
+import experienceRoutes from './experience.route';
+import projectRoutes from './project.route';
+import skillRoutes from './skill.route';
 
 const app = express();
 const router = express.Router();
@@ -33,7 +38,22 @@ router.get(('/'), (req, res) => {
 
 
 //mount user routes at /users
- router.use('/users', userRoutes);
+ router.use('/user', userRoutes);
+
+// mount about route
+router.use('/about', aboutRoutes);
+
+//education router
+router.use('/education', educationRoutes);
+
+// experience router
+router.use('/experience', experienceRoutes);
+// experience router
+router.use('/experience', experienceRoutes);
+// project router
+router.use('/project', projectRoutes);
+// skill router
+router.use('/skill', skillRoutes);
 
 //mount auth routes at /auth
 
