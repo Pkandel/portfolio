@@ -87,9 +87,6 @@ class About extends Component {
     				<TabPane tab={<span><Icon type="android" />Education</span>} key="2" >
                         Tab 2
     				</TabPane>
-    				<TabPane tab={<span><Icon type="android" />Skills</span>} key="3" >
-                        Add Your Skills
-    				</TabPane>
     			</Tabs>
     			<Footer style={{ textAlign: 'center', padding: '15px 40px 45px 40px' }}>
     				<div className="left">
