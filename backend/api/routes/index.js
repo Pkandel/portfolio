@@ -5,6 +5,7 @@ import educationRoutes from './education.route';
 import experienceRoutes from './experience.route';
 import projectRoutes from './project.route';
 import skillRoutes from './skill.route';
+import uploadRoutes from './upload.route';
 
 const app = express();
 const router = express.Router();
@@ -55,6 +56,8 @@ router.use('/project', projectRoutes);
 // skill router
 router.use('/skill', skillRoutes);
 
+// upload files to the server
+router.use('/upload', uploadRoutes);
 //mount auth routes at /auth
 
 

@@ -22,7 +22,6 @@ class Home extends Component {
 				 img: e.target.files[0]
 				 }
 		});
-
 	}
 	fileSelectHandler = (e) => {
 		const model = { ...this.state.model, img: e.target.files[0] };
@@ -63,17 +62,27 @@ class Home extends Component {
 	}
 
 	handleSubmit = () => {
-		const url = '/api/about/5ab6ff272c89cd6a1d4dbf31';
+		const url = '/api/about/5abe236da74c374502e8bb4f';
+		const uploadUrl = '/api/upload/5abe236da74c374502e8bb4f?type=profile';
 		const baseURL = "http://localhost:28080";
 		let fd = new FormData();
-		console.log('images in state', this.state.model.img);
 		fd.append('profile', this.state.model.img);
-		console.log(fd);
+		const data = this.state.model;
+
+		axios({
+			url: uploadUrl,
+			baseURL,
+			method: 'POST',
+			data: fd
+		})
+			.then(res => console.log('response from upload', res))
+			.catch(err => console.log('error from upload', err));
+
 		axios({
 			url,
 			baseURL,
 			method: 'POST',
-			data: fd
+			data
 		}).then(res => console.log(res));
 	}
 	render() {

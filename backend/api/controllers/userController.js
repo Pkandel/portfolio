@@ -46,10 +46,6 @@ function save(req, res) {
       message: 'successfully saved user to the database',
     });
   });
-  return res.json({
-    status: 'success',
-    message: 'successfully saved user to the database',
-  });
 }
 // get one records provided that the id of user
 function findOne(req, res) {

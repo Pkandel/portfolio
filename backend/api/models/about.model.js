@@ -9,7 +9,6 @@ const aboutSchema = new Schema ({
         facebook: String,
         linkedin: { type: String, required: true}
     },
-    picture: String,
     user: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 

@@ -8,6 +8,7 @@ const UserSchema = new Schema({
         last_name: { type: String, required: true }
     },
     email: { type: String, required: true },
+    img: String,
     created_on: { type: Date, required: true, default: new Date()},
 });
 
