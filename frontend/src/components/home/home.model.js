@@ -6,6 +6,6 @@ export const model  = {
 		facebook: '',
 		linkedin: ''
 	},
-	picture: '',
+	img: {},
 	user: ''
 };
