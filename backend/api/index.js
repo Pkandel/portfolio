@@ -6,8 +6,10 @@ import SwaggerExpress from 'swagger-express-mw';
 import mongoose from 'mongoose';
 import config from './config';
 import routes from './routes';
+import cors from 'cors';
 
 const app = express();
+app.use(cors());
 // parse body params and attach them to req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
