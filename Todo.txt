@@ -1,0 +1,4 @@
+1. Work on front end admin view.
+2. Implement all the validation on models in the backend.
+3. Implement the site access logic and how the router should be define for multiple users
+4. Complete client frontend view
