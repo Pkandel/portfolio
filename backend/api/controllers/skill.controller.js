@@ -23,7 +23,7 @@ function save(req, res) {
 }
 function list(req, res) {
     const user = req.params.user_id;
-    Skill.findOne`({user}, (err, response) => {
+    Skill.findOne({user}, (err, response) => {
         if (err) {
             return res.status(201).json({
                 message: 'Error Skill Experience details of the user',
