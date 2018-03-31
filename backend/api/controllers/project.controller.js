@@ -20,4 +20,21 @@ function save(req, res) {
     })
 }
 
-export { save };
+function list(req, res) {
+    const user = req.params.user_id;
+    Project.find({user}, (err, response) => {
+        if (err) {
+            return res.status(201).json({
+                message: 'Error fetchingt Project details of the user',
+                error: err
+            })
+        }
+        return res.json({
+            message: 'The Project details of the user',
+            data: response
+        })
+    })
+}
+
+
+export { save, list };

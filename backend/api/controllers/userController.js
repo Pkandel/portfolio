@@ -49,7 +49,8 @@ function save(req, res) {
 }
 // get one records provided that the id of user
 function findOne(req, res) {
-  User.findOne(({ id: req.params.id }), (err, user) => {
+  const id = req.params.user_id;
+  User.findById(id, (err, user) => {
     if (err) {
       return res.json({
         status: 'error',

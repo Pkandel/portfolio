@@ -16,4 +16,20 @@ function save(req, res) {
     })
 }
 
-export { save };
+function list(req, res) {
+    const user = req.params.user_id;
+    Experience.find({user}, (err, response) => {
+        if (err) {
+            return res.status(201).json({
+                message: 'Error fetchingt Experience details of the user',
+                error: err
+            })
+        }
+        return res.json({
+            message: 'The Experience details of the user',
+            data: response
+        })
+    })
+}
+
+export { save, list };

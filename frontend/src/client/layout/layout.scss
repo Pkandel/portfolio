@@ -1,0 +1,20 @@
+li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    a {
+        flex: 1;
+        text-decoration: none;
+        text-align: center;
+    }
+    .active {
+        text-decoration: none;        
+        color: black;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    li {
+        flex-direction: column;
+    }
+}

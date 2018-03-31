@@ -17,11 +17,26 @@ var storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+  },
+  fileFilter: (req, file, cb) => {
+    const filetypes = /jpeg|jpg|png|gif/;
+    //check ext
+    const extname = filetypes.test(path.extname(file.originalname).toLocaleLowerCase());
+    // check mime
+    const mimeType = filetypes.test(file.mimetype);
+    if(extname && mimeType){
+      // accept a file
+      return cb(null, true)
+    } else {
+      // reject a file
+      return cb('Valid images types are jpeg, jpg, png and gif', false);
+    }
   }
 })
 
 const upload = multer ({
- storage
+ storage,
+ fileSize: 1024 * 1024 * 3
 });
 
 export { loadENV, upload };

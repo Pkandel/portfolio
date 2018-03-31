@@ -24,4 +24,20 @@ function save(req, res) {
     })
 }
 
-export { save };
+function list(req, res) {
+    const user = req.params.user_id;
+    about.findOne({user}, (err, response) => {
+        if (err) {
+            return res.status(201).json({
+                message: 'Error fetchingt About details of the user',
+                error: err
+            })
+        }
+        return res.json({
+            message: 'The About details of the user',
+            data: response
+        })
+    })
+}
+
+export { save, list };

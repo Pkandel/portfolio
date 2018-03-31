@@ -2,10 +2,10 @@ import React from 'react';
 import { Layout, Icon } from 'antd';
 const { Header, Content } = Layout;
 import { Sidebar } from '../sidebar';
-import Router from '../../components/Router';
+import Router from '../../Router';
 import './layout.scss';
 
-class SiderDemo extends React.Component {
+class AdminLayout extends React.Component {
 	state = {
 		collapsed: false
 	};
@@ -35,4 +35,4 @@ class SiderDemo extends React.Component {
 	}
 }
 
-export default SiderDemo;
+export default AdminLayout;

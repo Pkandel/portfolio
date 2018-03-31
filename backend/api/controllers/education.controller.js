@@ -20,7 +20,7 @@ function list(req,res) {
             if(err) return res.json({ message: "Error fetching user"});
             return res.json({
                 message: "List of education provideres",
-                education: education
+                data: education
             })
         })
 }
