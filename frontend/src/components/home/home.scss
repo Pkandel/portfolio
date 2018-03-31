@@ -1,0 +1,13 @@
+.image-content {
+    padding: 8px;
+    border: 1px solid gainsboro;
+    img {
+        width: 100px;
+        height: 100px;
+    }
+    i {
+        float: right;
+        color: red;
+        cursor: pointer;
+    }
+}
