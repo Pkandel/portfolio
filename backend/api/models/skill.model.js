@@ -9,6 +9,8 @@ const skillSchema = new Schema ({
         level: { type: String, required: true, enum: skill_levels }
     }],
     user: { type: Schema.Types.ObjectId, ref: 'User' },
+    created_on: { type: Date, required: true, default: new Date()},
+    modified_on: { type:Date, required: true }
     
 });
 

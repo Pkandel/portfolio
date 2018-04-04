@@ -10,6 +10,8 @@ const experienceSchema = new Schema ({
     job_description: String,
     picture: String,
     user: { type: Schema.Types.ObjectId, ref: 'User' },
+    created_on: { type: Date, required: true, default: new Date()},
+    modified_on: { type:Date, required: true }
     
 });
 

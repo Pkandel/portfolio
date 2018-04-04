@@ -11,6 +11,8 @@ const projectSchema = new Schema ({
     source_code: String,
     demo_url: String,
     user: { type: Schema.Types.ObjectId, ref: 'User' },
+    created_on: { type: Date, required: true, default: new Date()},
+    modified_on: { type:Date, required: true }
     
 });
 

@@ -7,7 +7,7 @@ class Router extends Component {
 	render() {
 		return (
 			<Switch>
-				<Route exact path="/admin/home" component={Home} />
+				<Route exact path="/admin" component={Home} />
 				<Route exact path="/admin/about" component={About} />
 				<Route path="/admin/*" component={Home} />
 			</Switch>
