@@ -9,10 +9,14 @@ class BaseEntity extends Component {
 			baseEntity: {},
 			error:null
 		};
-		this.loadAbout();
+		this.loadEntity();
 	}
-    loadAbout = () => {
-    	axios.get('http://localhost:28080/api/base-entity/5ab70e46be4ec57ef49e066e')
+    loadEntity = () => {
+    	const path  = this.props.location.pathname.replace('/', '');
+    	console.log(path);
+    	const url = path === 'notes' ? 'http://localhost:28080/api/base-entity/5ab70e46be4ec57ef49e066e'
+    		: `http://localhost:28080/api/base-entity/5ab70e46be4ec57ef49e066e?title=${path}`;
+    	axios.get(url)
     		.then(res => {
     			this.setState({
     				baseEntity: res.data.data,

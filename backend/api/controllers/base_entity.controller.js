@@ -29,7 +29,9 @@ function save(req, res) {
 
 function list(req,res) {
     const user = req.params.user_id;
-    baseEntity.find({ user })
+    let { title } = req.query;
+    const cond =  title === undefined ? { user } : {title: { $regex: new RegExp(title.replace(/-/g, ' '), "i")}};
+    baseEntity.find(cond)
     .exec(function(err, entity) {
         console.log(entity)
             if(err) return res.json({ message: "Error fetching baseEntity"});

@@ -14,8 +14,10 @@ class Router extends Component {
 				<Route exact path="/experience" component={Experience} />
 				<Route exact path="/project" component={Project} />
 				<Route exact path="/skill" component={Skill} />
-				<Route exact path="/base-entity" component={BaseEntity} />
 				<Route exact path="/attribute" component={Attribute} />
+				<Route exact path="/notes" component={BaseEntity} />
+				<Route exact path="/:base_entity" component={BaseEntity} />
+				<Route exact path="/:base-entity/:attribute" component={Attribute}/>>
 				<Route path="*" component={Home} />
 			</Switch>
 		);
