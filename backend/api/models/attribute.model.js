@@ -5,9 +5,9 @@ const noteEnum = ['note', 'blog', 'both'];
 const attributeSchema = new Schema ({
     title: { type: String, required: true},
     description: {type: String, required: true},
-    category:{ type: enum, enum: TechEnum },
+    category:{ type: String, enum: TechEnum },
     isPublic: { type: Boolean, required: true, default: true },
-    type: { type: enum, enum: noteEnum, required: true },
+    type: { type: String, enum: noteEnum, required: true },
     user: { type: Schema.Types.ObjectId, ref: 'User' },
     base: { type: Schema.Types.ObjectId, ref: 'BaseEntity'},
     created_on: { type: Date, required: true, default: new Date()},
