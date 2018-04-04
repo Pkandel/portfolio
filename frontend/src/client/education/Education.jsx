@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { USER_ID  } from '../const';
 
 class Education extends Component {
 	constructor(props) {
@@ -12,7 +13,7 @@ class Education extends Component {
 		this.loadEducation();
 	}
     loadEducation = () => {
-    	axios.get('http://localhost:28080/api/education/5abe236da74c374502e8bb4f')
+    	axios.get(`http://localhost:28080/api/education/${USER_ID}`)
     		.then(res => {
     			console.log(res);
     			this.setState({

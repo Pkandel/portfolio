@@ -3,9 +3,19 @@ import Project from '../models/project.model.js';
 function save(req, res) {
     const user = req.params.user_id;
     const { project_name, company_name, project_description, technology_used, role_description, source_code, demo_url } = req.body;
+    const modified_on = new Date();
     const project = new Project({
-        project_name, company_name, project_description, technology_used, role_description, source_code, demo_url, user 
+        project_name,
+        company_name,
+        project_description,
+        technology_used,
+        role_description,
+        source_code,
+        demo_url,
+        user,
+        modified_on
     });
+
     project.save((err, response) => {
         if(err) {
             console.log('Error saving project', err);

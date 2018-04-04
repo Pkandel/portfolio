@@ -3,7 +3,15 @@ import Education from '../models/education.model.js';
 function save(req, res) {
     const user = req.params.user_id;
     const { course_name, college_name, start_date, course_description } = req.body;
-    const edu = new Education({ course_name, college_name, start_date, course_description, user  });
+    const modified_on = new Date();
+    const edu = new Education({ 
+        course_name, 
+        college_name, 
+        start_date, 
+        course_description, 
+        user, 
+        modified_on  
+    });
     edu.save((err, response) => {
         if(err) return res.json({ message: "error saveing education" });
         return res.json({

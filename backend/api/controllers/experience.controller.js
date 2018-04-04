@@ -4,8 +4,9 @@ import Experience from '../models/experience.model.js';
 function save(req, res) {
     const user = req.params.user_id;
     const { job_title, company_name, start_date, end_date, job_description } = req.body;
+    const modified_on = new Date();
     const experience = new Experience({
-        job_title, company_name, start_date, end_date, job_description, user 
+        job_title, company_name, start_date, end_date, job_description, user, modified_on
     });
     experience.save((err, response) => {
         if(err) throw err;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { USER_ID } from '../const';
 
 class Skill extends Component {
 	constructor(props) {
@@ -12,7 +13,7 @@ class Skill extends Component {
 		this.loadSkill();
 	}
     loadSkill = () => {
-    	axios.get('http://localhost:28080/api/skill/5abe236da74c374502e8bb4f')
+    	axios.get(`http://localhost:28080/api/skill/${USER_ID}`)
     		.then(res => {
     			this.setState({
     				skill: res.data.data,

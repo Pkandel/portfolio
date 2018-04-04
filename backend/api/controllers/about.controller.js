@@ -3,11 +3,13 @@ import { upload } from '../helpers';
 function save(req, res) {
     const user = req.params.user_id;
     const { title, company_name, description, link } = req.body;
+    const modified_on = new Date();
     const about_me = new about({
         title,
         company_name,
         description,
         link,
+        modified_on,
         user
     })
     about_me.save((err, response) => {

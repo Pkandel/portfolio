@@ -3,10 +3,12 @@ import Skill from '../models/skill.model.js';
 function save(req, res) {
     const user = req.params.user_id;
     const { skill } = req.body;
+    const modified_on = new Date();
 
     const _skill = new Skill({
         skill,
-        user
+        user,
+        modified_on
     })
     _skill.save((err, response) => {
         if(err){

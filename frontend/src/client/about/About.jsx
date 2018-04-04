@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+// for testing purpose
+import { USER_ID } from '../const';
 
 class About extends Component {
 	constructor(props) {
@@ -12,7 +14,7 @@ class About extends Component {
 		this.loadAbout();
 	}
     loadAbout = () => {
-    	axios.get('http://localhost:28080/api/about/5abe236da74c374502e8bb4f')
+    	axios.get(`http://localhost:28080/api/about/${USER_ID}`)
     		.then(res => {
     			this.setState({
     				about: res.data.data,

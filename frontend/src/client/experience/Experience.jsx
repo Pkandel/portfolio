@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import { USER_ID } from '../const';
 class Experience extends Component {
 	constructor(props) {
 		super(props);
@@ -12,7 +12,7 @@ class Experience extends Component {
 		this.loadExperience();
 	}
     loadExperience = () => {
-    	axios.get('http://localhost:28080/api/experience/5abe236da74c374502e8bb4f')
+    	axios.get(`http://localhost:28080/api/experience/${USER_ID}`)
     		.then(res => {
     			console.log(res);
     			this.setState({

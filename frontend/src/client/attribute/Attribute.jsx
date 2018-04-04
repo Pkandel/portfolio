@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { USER_ID, BASE_ID } from '../const';
 
 class Attribute extends Component {
 	constructor(props) {
@@ -14,7 +15,7 @@ class Attribute extends Component {
     loadAbout = () => {
     	const pathArray = this.props.location.pathname.split('/');
     	const attribute = pathArray[2];
-    	axios.get(`http://localhost:28080/api/attribute/5ab70e46be4ec57ef49e066e/5ac439f16083a369ad2475ff?attribute=${attribute}`)
+    	axios.get(`http://localhost:28080/api/attribute/${USER_ID}/${BASE_ID}?attribute=${attribute}`)
     		.then(res => {
     			this.setState({
     				attribute: res.data.data,

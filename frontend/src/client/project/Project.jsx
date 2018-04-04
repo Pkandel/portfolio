@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { USER_ID } from '../const';
 
 class Project extends Component {
 	constructor(props) {
@@ -12,7 +13,7 @@ class Project extends Component {
 		this.loadProject();
 	}
     loadProject = () => {
-    	axios.get('http://localhost:28080/api/project/5abe236da74c374502e8bb4f')
+    	axios.get(`http://localhost:28080/api/project/${USER_ID}`)
     		.then(res => {
     			this.setState({
     				project: res.data.data,
