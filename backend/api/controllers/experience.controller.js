@@ -3,16 +3,23 @@ import Experience from '../models/experience.model.js';
 
 function save(req, res) {
     const user = req.params.user_id;
-    const { job_title, company_name, start_date, end_date, job_description } = req.body;
     const modified_on = new Date();
-    const experience = new Experience({
-        job_title, company_name, start_date, end_date, job_description, user, modified_on
-    });
-    experience.save((err, response) => {
-        if(err) throw err;
+    const _experienceArray = req.body;
+    _experienceArray.map(exp => {
+        exp['modified_on'] = modified_on;
+        exp['user'] = user;
+    })
+
+    Experience.insertMany( _experienceArray, (err, response) => {
+        if(err) {
+            return res.json({
+                message: 'Error saving to the database',
+                error: err
+            })
+        }
         return res.json({
             message: 'Successfully saved into the database',
-            data: null 
+            data: response
         })
     })
 }

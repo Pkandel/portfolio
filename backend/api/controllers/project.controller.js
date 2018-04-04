@@ -2,30 +2,23 @@ import Project from '../models/project.model.js';
 
 function save(req, res) {
     const user = req.params.user_id;
-    const { project_name, company_name, project_description, technology_used, role_description, source_code, demo_url } = req.body;
     const modified_on = new Date();
-    const project = new Project({
-        project_name,
-        company_name,
-        project_description,
-        technology_used,
-        role_description,
-        source_code,
-        demo_url,
-        user,
-        modified_on
-    });
-
-    project.save((err, response) => {
+    let _projectArray = req.body;
+    _projectArray.map(project => {
+        project['modified_on'] = modified_on;
+        project['user'] = user;
+    })
+    Project.insertMany(_projectArray, (err, response) => {
         if(err) {
             console.log('Error saving project', err);
             return res.json({
                 message: 'Error saving project',
-                data: err
+                error: err
             })
         }
         return res.json({
-            message: 'Successfully saved the project into the database'
+            message: 'Successfully saved the project into the database',
+            data: response
         })
     })
 }

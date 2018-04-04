@@ -27,23 +27,25 @@ function list(req, res) {
 // save user to the database
 function save(req, res) {
   const { username, email, name } = req.body;
-  const user = new User({
+  const modified_on = new Date();
+  const _user = new User({
     username,
     email,
     name,
+    modified_on
 
   });
 
-  user.save((err) => {
+  _user.save((err, user) => {
     if (err) {
       return res.json({
-        status: 'error',
         message: 'error saving user',
+        error: err,
       });
     }
     return res.json({
-      status: 'success',
       message: 'successfully saved user to the database',
+      data: user,
     });
   });
 }

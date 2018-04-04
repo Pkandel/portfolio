@@ -7,38 +7,37 @@ class Experience extends Component {
 		this.state = {
 			fetching: true,
 			experience: [],
-			error:null
+			error: null
 		};
 		this.loadExperience();
 	}
-    loadExperience = () => {
-    	axios.get(`http://localhost:28080/api/experience/${USER_ID}`)
-    		.then(res => {
-    			console.log(res);
-    			this.setState({
-    				experience: res.data.data,
-    				fetching: false
-    			});
-    		})
-    		.catch(err => {
-    			this.setState({
-    				error: err.message
-    			});
-    			console.log('err', err);
-    		}
-    		);
-    }
+	loadExperience = () => {
+		axios.get(`http://localhost:28080/api/experience/${USER_ID}`)
+			.then(res => {
+				this.setState({
+					experience: res.data.data,
+					fetching: false
+				});
+			})
+			.catch(err => {
+				this.setState({
+					error: err.message
+				});
+				console.log('err', err);
+			}
+			);
+	}
 
-    render() {
-    	if (this.state.fetching){
-    		return null;
-    	}
+	render() {
+		if (this.state.fetching) {
+			return null;
+		}
 
-    	return (
-    		<div>
-    			<pre>{JSON.stringify(this.state, null, 2)} </pre>
-    		</div>
-    	);
-    }
+		return (
+			<div>
+				<pre>{JSON.stringify(this.state, null, 2)} </pre>
+			</div>
+		);
+	}
 }
 export default Experience;

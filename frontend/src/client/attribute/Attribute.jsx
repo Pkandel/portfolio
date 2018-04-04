@@ -12,35 +12,35 @@ class Attribute extends Component {
 		};
 		this.loadAbout();
 	}
-    loadAbout = () => {
-    	const pathArray = this.props.location.pathname.split('/');
-    	const attribute = pathArray[2];
-    	axios.get(`http://localhost:28080/api/attribute/${USER_ID}/${BASE_ID}?attribute=${attribute}`)
-    		.then(res => {
-    			this.setState({
-    				attribute: res.data.data,
-    				fetching: false
-    			});
-    		})
-    		.catch(err => {
-    			this.setState({
-    				error: err.message
-    			});
-    			console.log('err', err);
-    		}
-    		);
-    }
+	loadAbout = () => {
+		const pathArray = this.props.location.pathname.split('/');
+		const attribute = pathArray[2];
+		axios.get(`http://localhost:28080/api/attribute/${USER_ID}/${BASE_ID}?attribute=${attribute}`)
+			.then(res => {
+				this.setState({
+					attribute: res.data.data,
+					fetching: false
+				});
+			})
+			.catch(err => {
+				this.setState({
+					error: err.message
+				});
+				console.log('err', err);
+			}
+			);
+	}
 
-    render() {
-    	if (this.state.fetching){
-    		return null;
-    	}
+	render() {
+		if (this.state.fetching){
+			return null;
+		}
 
-    	return (
-    		<div>
-    			<pre>{JSON.stringify(this.state, null, 2)} </pre>
-    		</div>
-    	);
-    }
+		return (
+			<div>
+				<pre>{JSON.stringify(this.state, null, 2)} </pre>
+			</div>
+		);
+	}
 }
 export default Attribute;

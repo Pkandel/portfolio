@@ -10,9 +10,7 @@ const skillSchema = new Schema ({
     }],
     user: { type: Schema.Types.ObjectId, ref: 'User' },
     created_on: { type: Date, required: true, default: new Date()},
-    modified_on: { type:Date, required: true },
-    isPublic: { type: Boolean, required: true, default: true }
-    
+    modified_on: { type:Date, required: true }    
 });
 
 skillSchema.plugin(AutoIncrement, {inc_field: 'skill_id'});

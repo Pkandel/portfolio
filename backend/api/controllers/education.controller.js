@@ -2,21 +2,20 @@ import Education from '../models/education.model.js';
 
 function save(req, res) {
     const user = req.params.user_id;
-    const { course_name, college_name, start_date, course_description } = req.body;
     const modified_on = new Date();
-    const edu = new Education({ 
-        course_name, 
-        college_name, 
-        start_date, 
-        course_description, 
-        user, 
-        modified_on  
-    });
-    edu.save((err, response) => {
-        if(err) return res.json({ message: "error saveing education" });
+    let _educationArray = req.body;
+    _educationArray.map(edu => {
+        edu['modified_on'] = modified_on;
+        edu['user'] = user;
+    })
+    Education.insertMany(_educationArray, (err, response) => {
+        if(err) return res.json({ 
+            message: "error saveing education",
+            error: err
+        });
         return res.json({
             message: 'Successfully saved into the database',
-            data: null 
+            data: response 
         })
     })
 }
