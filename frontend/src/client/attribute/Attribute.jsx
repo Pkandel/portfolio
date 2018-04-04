@@ -12,7 +12,9 @@ class Attribute extends Component {
 		this.loadAbout();
 	}
     loadAbout = () => {
-    	axios.get('http://localhost:28080/api/attribute/5ab70e46be4ec57ef49e066e/5ac439f16083a369ad2475ff')
+    	const pathArray = this.props.location.pathname.split('/');
+    	const attribute = pathArray[2];
+    	axios.get(`http://localhost:28080/api/attribute/5ab70e46be4ec57ef49e066e/5ac439f16083a369ad2475ff?attribute=${attribute}`)
     		.then(res => {
     			this.setState({
     				attribute: res.data.data,

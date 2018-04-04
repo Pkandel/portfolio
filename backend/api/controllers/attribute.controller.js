@@ -29,8 +29,11 @@ function save(req, res) {
 }
 
 function list(req,res) {
-    const {user_id: user, base_id: base } = req.params;
-    attribute.find({ user, base })
+    const { user_id: user, base_id: base } = req.params;
+    let { attribute: title } = req.query;
+    title = title.replace(/-/g, ' ');
+    console.log(title)
+    attribute.find({ user, base, title: { $regex: new RegExp(title, 'i')} })
     .exec(function(err, attr) {
             if(err) return res.json({ message: "Error fetching Attribute"});
             return res.json({
