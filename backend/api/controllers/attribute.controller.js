@@ -1,9 +1,7 @@
 import attribute from '../models/attribute.model.js';
 function save(req, res) {
     const { user_id: user, base_id: base } = req.params;
-    const { title, description, category, type } = req.body;
-    let { isPublic } = req.body;
-    isPublic = isPublic === undefined ? true : isPublic;
+    const { title, description, category, type, heading, isPublic } = req.body;
     const modified_on = new Date();
     const _attribute = new attribute({
         title,
@@ -13,6 +11,7 @@ function save(req, res) {
         category,
         type,
         base,
+        heading,
         modified_on 
     })
     _attribute.save((err, response) => {

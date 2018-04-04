@@ -6,6 +6,7 @@ const attributeSchema = new Schema ({
     title: { type: String, required: true},
     description: {type: String, required: true},
     category:{ type: String, enum: TechEnum },
+    heading: String,
     isPublic: { type: Boolean, required: true, default: true },
     type: { type: String, enum: noteEnum, required: true },
     user: { type: Schema.Types.ObjectId, ref: 'User' },
