@@ -27,4 +27,17 @@ function save(req, res) {
     })
 }
 
-export { save };
+function list(req,res) {
+    const user = req.params.user_id;
+    baseEntity.find({ user })
+    .exec(function(err, entity) {
+        console.log(entity)
+            if(err) return res.json({ message: "Error fetching baseEntity"});
+            return res.json({
+                message: "List of Base Entity.",
+                data: entity
+            })
+        })
+}
+
+export { save, list };

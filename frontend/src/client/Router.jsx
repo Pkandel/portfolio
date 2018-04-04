@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router';
-import { About, Contact, Education, Experience, Home, Project, Skill } from './';
+import { About, Contact, Education, Experience, Home, Project, Skill, BaseEntity, Attribute } from './';
 
 class Router extends Component {
 
@@ -14,6 +14,8 @@ class Router extends Component {
 				<Route exact path="/experience" component={Experience} />
 				<Route exact path="/project" component={Project} />
 				<Route exact path="/skill" component={Skill} />
+				<Route exact path="/base-entity" component={BaseEntity} />
+				<Route exact path="/attribute" component={Attribute} />
 				<Route path="*" component={Home} />
 			</Switch>
 		);

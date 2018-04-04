@@ -28,4 +28,16 @@ function save(req, res) {
     })
 }
 
-export { save };
+function list(req,res) {
+    const {user_id: user, base_id: base } = req.params;
+    attribute.find({ user, base })
+    .exec(function(err, attr) {
+            if(err) return res.json({ message: "Error fetching Attribute"});
+            return res.json({
+                message: "List of Attributes.",
+                data: attr
+            })
+        })
+}
+
+export { save, list };

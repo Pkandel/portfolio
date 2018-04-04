@@ -14,6 +14,8 @@ class ClientLayout extends Component {
 					<NavLink  exact to="/experience"  activeClassName="active" >Experience</NavLink>
 					<NavLink  exact to="/project"  activeClassName="active" >Project</NavLink>
 					<NavLink  exact to="/skill"  activeClassName="active" >Skill</NavLink>
+					<NavLink  exact to="/base-entity"  activeClassName="active" >Base Entity</NavLink>
+					<NavLink  exact to="/attribute"  activeClassName="active" >Attribute</NavLink>
 				</li>
 				<Router />
 			</div>
