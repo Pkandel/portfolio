@@ -6,6 +6,7 @@ import experienceRoutes from './experience.route';
 import projectRoutes from './project.route';
 import skillRoutes from './skill.route';
 import uploadRoutes from './upload.route';
+import baseEntityRoutes from './base_entity.route';
 
 const app = express();
 const router = express.Router();
@@ -58,6 +59,9 @@ router.use('/skill', skillRoutes);
 
 // upload files to the server
 router.use('/upload', uploadRoutes);
+
+//base entity routes
+router.use('/base-entity', baseEntityRoutes);
 //mount auth routes at /auth
 
 
