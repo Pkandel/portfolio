@@ -4,7 +4,7 @@ const contactSchema = new Schema ({
     name: { type: String, required: true },
     email: { type: String, required: true },
     message: { type: String, required: true },
-    user: { type: Schema.Types.ObjectId, ref: 'User' },
+    user: { type: Schema.Types.ObjectId, ref: 'User' }
     
 })
 

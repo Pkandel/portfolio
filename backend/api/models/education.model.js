@@ -11,7 +11,8 @@ const educationSchema = new Schema ({
     picture: String,
     user: { type: Schema.Types.ObjectId, ref: 'User' },
     created_on: { type: Date, required: true, default: new Date()},
-    modified_on: { type:Date, required: true }
+    modified_on: { type:Date, required: true },
+    public: { type: Boolean, required: true, default: true }
     
 });
 educationSchema.plugin(AutoIncrement, {inc_field: 'education_id'});
