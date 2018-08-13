@@ -17,10 +17,9 @@ RUN npm install babel-cli -g
 
 # copy rest of the project
 COPY . /app
-RUN npm run build
 
 #expose port 4000 to outside world
 EXPOSE 28080
  
 #cmd to start 
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
