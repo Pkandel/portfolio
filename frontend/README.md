@@ -19,7 +19,7 @@ The list of technology used by this project is as follows:
 In development mode
 ```sh
 $ git clone https://githun.com/pkandel/cms-frontend
-$ cd cms-frontend; npm install
+$ cd frontend; npm install
 $ npm run dev
 ```
 In production mode
