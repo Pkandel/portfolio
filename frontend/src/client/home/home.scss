@@ -18,3 +18,43 @@
     }
 
 }
+blockquote {
+    background: #eee;
+    line-height: 40px;
+    padding-left: 15px;
+    border-left: 5px solid #2a2a;
+}
+
+table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    box-shadow: 0px 2px 1px 2px;
+    thead {
+        th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+        }
+    }
+    th, td {
+        padding: 0.75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+    }
+    tbody {
+        border-top: 2px solid #dee2e6;
+        tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.05);
+          }
+          tr:nth-of-type(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+          }
+          tr {
+              &:hover {
+                background-color: rgba(0, 0, 0, 0.075);
+              }
+          }
+    }
+  }
+  
