@@ -12,11 +12,70 @@ class Home extends Component {
 		this.converter = new showdown.Converter();
 		this.state = {
 			markdown: '',
-			html: this.converter.makeHtml('# Hello World')
+			html: ''
 		};
 	}
 	componentDidMount() {
 		hljs.initHighlightingOnLoad();
+		// set initial markup
+		const markdown = `
+## How to setup HTTPS ( Ubuntu 18)
+
+#### Install certbot
+\`\`\`
+sudo apt-get update
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt install python-certbot-nginx
+// check if nginx conf is valid
+sudo nginx -t
+// reload nginx conf
+sudo systemctl reload nginx
+\`\`\`
+> Apply https to server_name 
+\`\`\`
+sudo certbot --nginx -d example.com -d www.example.com
+\`\`\`
+> Auto renew certificate
+\`\`\`
+sudo certbot renew --dry-run
+\`\`\`
+
+> See all certificates
+\`\`\`
+certbot certificates
+\`\`\`
+
+### If this does not work
+> Install certbot-auto which is a wrapper for certbot
+\`\`\`
+wget https://dl.eff.org/certbot-auto
+chmod a+x ./certbot-auto
+sudo certbot-auto --nginx -d example.com -d www.example.com
+sudo certbot-auto renew --dry-run
+\`\`\`
+\` bug \`
+\`\`\`
+Package python-virtualenv is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+
+E: Package 'python-virtualenv' has no installation candidate
+\`\`\`
+> For this, add \`deb http://us.archive.ubuntu.com/ubuntu/ trusty main restricted universe\` to /etc/apt/sources.list`;
+		this.setState({
+			markdown,
+			html: this.converter.makeHtml(markdown)
+		});
+	}
+	componentDidUpdate () {
+		// This is required if route changes
+		const code = document.querySelectorAll('code');
+		if (code.length) {
+			code.forEach(c => {
+				hljs.highlightBlock(c);
+			});
+		}
 	}
 	handleChange = (e) => {
 		this.setState({
@@ -40,7 +99,7 @@ class Home extends Component {
 					value={this.state.markdown}
 					onChange={this.handleChange}
 				/>
-				<h1> This is client Home </h1>
+				<h1> Preview Pane </h1>
 				<div dangerouslySetInnerHTML={{ __html: `${this.state.html}`}} />
 			</div>
 		);
