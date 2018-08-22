@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import hljs from 'highlight.js';
+import { Transition } from 'react-transition-group';
 import './home.scss';
 
 const showdown = require('showdown');
@@ -12,10 +13,18 @@ class Home extends Component {
 		this.converter = new showdown.Converter();
 		this.state = {
 			markdown: '',
-			html: ''
+			html: '',
+			showHeading: false
 		};
 	}
 	componentDidMount() {
+		document.addEventListener('click', (el) => {
+			if (el.target.id !== 'headingIcon') {
+				this.setState({
+					showHeading: false
+				});
+			}
+		});
 		hljs.initHighlightingOnLoad();
 		// set initial markup
 		const markdown = `
@@ -91,9 +100,48 @@ E: Package 'python-virtualenv' has no installation candidate
 		}
 		);
 	}
+	handleHeadingClick = () => {
+		this.setState({
+			showHeading: !this.state.showHeading
+		});
+	}
+	handleItalicClick = () => {
+		
+	}
 	render() {
+		const { showHeading } = this.state;
+		const Heading = () => {
+			return showHeading ?  (
+				<div className="heading-dropdown">
+					<li> <h1>H1</h1></li>
+					<li> <h2>H2</h2></li>
+					<li> <h3>H3</h3></li>
+					<li> <h4>H4</h4></li>
+				</div>) : null;
+		};
 		return (
 			<div className="home-component">
+				<div className="icon">
+					<i className="fas fa-heading" onClick={this.handleHeadingClick} id="headingIcon"/>
+					<Heading />
+					<i className="fas fa-italic" onClick={this.handleItalicClick} />
+					<i className="fas fa-bold" onClick={this.handleHeadingClick}/>
+					<i className="fas fa-strikethrough" onClick={this.handleHeadingClick}/>
+					<i className="fas fa-code" onClick={this.handleHeadingClick}/>
+					<i className="fas fa-table" onClick={this.handleHeadingClick}/>
+					<i className="fas fa-image" onClick={this.handleHeadingClick}/>
+					<i className="fas fa-quote-right" onClick={this.handleHeadingClick}/>
+					<i className="fas fa-list-ul" onClick={this.handleHeadingClick}/>
+					<i className="fas fa-list-ol" onClick={this.handleHeadingClick}/>
+					<i className="fas fa-th-list" onClick={this.handleHeadingClick}/>
+					<div className="right">
+						<i className="fas fa-align-left" onClick={this.handleHeadingClick}/>
+						<i className="fas fa-align-center" onClick={this.handleHeadingClick}/>
+						<i className="fas fa-align-right" onClick={this.handleHeadingClick}/>
+						<i className="fas fa-redo" onClick={this.handleHeadingClick}/>
+						<i className="fas fa-undo" onClick={this.handleHeadingClick}/>
+					</div>
+				</div>
 				<textarea
 					name="markdown"
 					value={this.state.markdown}

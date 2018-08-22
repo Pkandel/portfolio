@@ -2,6 +2,70 @@
     width: 80%;
     margin: auto;
     margin-top: 50px;
+    li {
+        display: block;
+    }
+    img[alt$=">"] {
+        float:right;
+      }
+      
+      img[alt$="<"] {
+        float:left;
+      }
+      
+      img[alt$="<>"] {
+          display: block;
+          max-width: 100%;
+          height: auto;
+          margin: auto;
+          float: none!important;
+      }
+    .icon {
+        background: #eee;
+        height: 30px;
+        min-width: 800px;
+        width: 800px;
+        padding: 6px 12px;
+        box-shadow: 0px 1px 2px 1px;
+        cursor: pointer;
+        i {
+            margin-right: 15px;
+            &:hover {
+                color: blueviolet;
+            }
+        }
+        img {
+            width: 18px;
+            height: 14px;
+            margin-bottom: 5px;
+        }
+        .heading-dropdown {
+            position: absolute;
+            background: #eee;
+            margin-left: -12px;
+            padding: 0px 10px;
+            margin-top: 2px;
+            padding-bottom: 5px;
+            height: auto;
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                margin-top: 0;
+                margin-bottom: 0;
+                &:hover {
+                    color: blueviolet;
+                }
+            }
+            .h1 {
+                font-size: 20px;
+            }
+            .h2 {
+                font-size: 18px;
+            }
+        }
+    }
     textarea {
         min-width: 800px;
         min-height: 200px;
@@ -10,14 +74,14 @@
         border: none;
         margin-top: 0px;
         margin-bottom: 0px;
-        box-shadow: 0px 0px 1px 1px;     
+        box-shadow: 0px 0px 1px 1px;
         outline: none;
         &:hover {
-            box-shadow: 0px 2px 6px 2px;    
+            box-shadow: 0px 2px 6px 2px;
         }
     }
-
 }
+
 blockquote {
     background: #eee;
     line-height: 40px;
@@ -37,7 +101,8 @@ table {
             border-bottom: 2px solid #dee2e6;
         }
     }
-    th, td {
+    th,
+    td {
         padding: 0.75rem;
         vertical-align: top;
         border-top: 1px solid #dee2e6;
@@ -46,15 +111,14 @@ table {
         border-top: 2px solid #dee2e6;
         tr:nth-of-type(odd) {
             background-color: rgba(0, 0, 0, 0.05);
-          }
-          tr:nth-of-type(even) {
+        }
+        tr:nth-of-type(even) {
             background-color: rgba(255, 255, 255, 0.05);
-          }
-          tr {
-              &:hover {
+        }
+        tr {
+            &:hover {
                 background-color: rgba(0, 0, 0, 0.075);
-              }
-          }
+            }
+        }
     }
-  }
-  
+}

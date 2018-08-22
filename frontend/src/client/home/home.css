@@ -1,0 +1,117 @@
+.home-component {
+  width: 80%;
+  margin: auto;
+  margin-top: 50px; }
+
+.home-component li {
+  display: block; }
+
+.home-component img[alt$=">"] {
+  float: right; }
+
+.home-component img[alt$="<"] {
+  float: left; }
+
+.home-component img[alt$="<>"] {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: auto;
+  float: none !important; }
+
+.home-component .icon {
+  background: #eee;
+  height: 30px;
+  min-width: 800px;
+  width: 800px;
+  padding: 6px 12px;
+  box-shadow: 0px 1px 2px 1px;
+  cursor: pointer; }
+
+.home-component .icon i {
+  margin-right: 15px; }
+
+.home-component .icon i:hover {
+  color: blueviolet; }
+
+.home-component .icon img {
+  width: 18px;
+  height: 14px;
+  margin-bottom: 5px; }
+
+.home-component .icon .heading-dropdown {
+  position: absolute;
+  background: #eee;
+  margin-left: -12px;
+  padding: 0px 10px;
+  margin-top: 2px;
+  padding-bottom: 5px;
+  height: auto; }
+
+.home-component .icon .heading-dropdown h1,
+.home-component .icon .heading-dropdown h2,
+.home-component .icon .heading-dropdown h3,
+.home-component .icon .heading-dropdown h4 {
+  margin-top: 0;
+  margin-bottom: 0; }
+
+.home-component .icon .heading-dropdown h1:hover,
+.home-component .icon .heading-dropdown h2:hover,
+.home-component .icon .heading-dropdown h3:hover,
+.home-component .icon .heading-dropdown h4:hover {
+  color: blueviolet; }
+
+.home-component .icon .heading-dropdown .h1 {
+  font-size: 20px; }
+
+.home-component .icon .heading-dropdown .h2 {
+  font-size: 18px; }
+
+.home-component textarea {
+  min-width: 800px;
+  min-height: 200px;
+  padding: 8px 12px;
+  height: 601px;
+  border: none;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  box-shadow: 0px 0px 1px 1px;
+  outline: none; }
+
+.home-component textarea:hover {
+  box-shadow: 0px 2px 6px 2px; }
+
+blockquote {
+  background: #eee;
+  line-height: 40px;
+  padding-left: 15px;
+  border-left: 5px solid #2a2a; }
+
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  box-shadow: 0px 2px 1px 2px; }
+
+table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6; }
+
+table th,
+table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6; }
+
+table tbody {
+  border-top: 2px solid #dee2e6; }
+
+table tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05); }
+
+table tbody tr:nth-of-type(even) {
+  background-color: rgba(255, 255, 255, 0.05); }
+
+table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.075); }
