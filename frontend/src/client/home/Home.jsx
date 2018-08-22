@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import hljs from 'highlight.js';
-import { Transition } from 'react-transition-group';
 import './home.scss';
 
 const showdown = require('showdown');
@@ -17,6 +16,48 @@ class Home extends Component {
 			showHeading: false
 		};
 	}
+	 insertAtCaret(areaId, text) {
+		let txtarea = document.getElementById(areaId);
+		if (!txtarea) {
+		  return;
+		}
+	  
+		let scrollPos = txtarea.scrollTop;
+		let strPos = 0;
+		let br = ((txtarea.selectionStart || txtarea.selectionStart == '0') ?
+		  "ff" : (document.selection ? "ie" : false));
+		if (br == "ie") {
+		  txtarea.focus();
+		  let range = document.selection.createRange();
+		  range.moveStart('character', -txtarea.value.length);
+		  strPos = range.text.length;
+		} else if (br == "ff") {
+		  strPos = txtarea.selectionStart;
+		}
+	  
+		let front = (txtarea.value).substring(0, strPos);
+		let back = (txtarea.value).substring(strPos, txtarea.value.length);
+		txtarea.value = front + text + back;
+		this.setState({
+			markdown: front + text + back
+		});
+		strPos = strPos + text.length;
+		if (br == "ie") {
+		  txtarea.focus();
+		  let ieRange = document.selection.createRange();
+		  ieRange.moveStart('character', -txtarea.value.length);
+		  ieRange.moveStart('character', strPos);
+		  ieRange.moveEnd('character', 0);
+		  ieRange.select();
+		} else if (br == "ff") {
+			txtarea.selectionStart = strPos;
+			txtarea.selectionEnd = strPos - 1;
+			txtarea.focus();
+		}
+	  
+		txtarea.scrollTop = scrollPos;
+
+	  }
 	componentDidMount() {
 		document.addEventListener('click', (el) => {
 			if (el.target.id !== 'headingIcon') {
@@ -100,27 +141,30 @@ E: Package 'python-virtualenv' has no installation candidate
 		}
 		);
 	}
-	handleHeadingClick = () => {
+	handleHeadingClick = (e) => {
 		this.setState({
 			showHeading: !this.state.showHeading
 		});
+		if (!e.target.id) {
+			this.insertAtCaret('markdownEditor', '#  ');
+		}
 	}
 	handleItalicClick = () => {
-		
+		this.insertAtCaret('markdownEditor', "__");
 	}
 	render() {
 		const { showHeading } = this.state;
 		const Heading = () => {
 			return showHeading ?  (
 				<div className="heading-dropdown">
-					<li> <h1>H1</h1></li>
+					<li> <h1  onClick={this.handleHeadingClick}>H1</h1></li>
 					<li> <h2>H2</h2></li>
 					<li> <h3>H3</h3></li>
 					<li> <h4>H4</h4></li>
 				</div>) : null;
 		};
 		return (
-			<div className="home-component">
+			<div className="home-component" id="markdownRoot">
 				<div className="icon">
 					<i className="fas fa-heading" onClick={this.handleHeadingClick} id="headingIcon"/>
 					<Heading />
@@ -144,6 +188,7 @@ E: Package 'python-virtualenv' has no installation candidate
 				</div>
 				<textarea
 					name="markdown"
+					id="markdownEditor"
 					value={this.state.markdown}
 					onChange={this.handleChange}
 				/>
