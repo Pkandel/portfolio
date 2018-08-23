@@ -165,6 +165,13 @@ E: Package 'python-virtualenv' has no installation candidate
 	handleBoldClick = () => {
 		this.insertAtCaret('markdownEditor', "****", 'bold');
 	}
+	handleStrikeClick = () => {
+		this.insertAtCaret('markdownEditor', "~~~~", 'bold');
+	}
+
+	handleCodeClick = () => {
+		this.insertAtCaret('markdownEditor', "``", 'italic');
+	}
 	render() {
 		const { showHeading } = this.state;
 		const Heading = () => {
@@ -183,8 +190,8 @@ E: Package 'python-virtualenv' has no installation candidate
 					<Heading />
 					<i className="fas fa-italic" onClick={this.handleItalicClick} />
 					<i className="fas fa-bold" onClick={this.handleBoldClick}/>
-					<i className="fas fa-strikethrough" onClick={this.handleHeadingClick}/>
-					<i className="fas fa-code" onClick={this.handleHeadingClick}/>
+					<i className="fas fa-strikethrough" onClick={this.handleStrikeClick}/>
+					<i className="fas fa-code" onClick={this.handleCodeClick}/>
 					<i className="fas fa-table" onClick={this.handleHeadingClick}/>
 					<i className="fas fa-image" onClick={this.handleHeadingClick}/>
 					<i className="fas fa-quote-right" onClick={this.handleHeadingClick}/>

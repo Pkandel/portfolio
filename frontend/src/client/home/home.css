@@ -19,6 +19,16 @@
   margin: auto;
   float: none !important; }
 
+.home-component p code {
+  color: #c7254e !important;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+  padding: 2px;
+  display: inline-block; }
+
+.home-component p code * {
+  color: #c7254e !important; }
+
 .home-component .icon {
   background: #eee;
   height: 30px;
