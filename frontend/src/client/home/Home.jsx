@@ -16,7 +16,7 @@ class Home extends Component {
 			showHeading: false
 		};
 	}
-	 insertAtCaret(areaId, text) {
+	 insertAtCaret(areaId, text, type) {
 		let txtarea = document.getElementById(areaId);
 		if (!txtarea) {
 		  return;
@@ -42,6 +42,16 @@ class Home extends Component {
 			markdown: front + text + back
 		});
 		strPos = strPos + text.length;
+		switch (type) {
+			case 'italic':
+				strPos =strPos - 1;
+				break;
+			case 'bold':
+				strPos = strPos -2;
+				break;
+			default:
+				break;
+		}
 		if (br == "ie") {
 		  txtarea.focus();
 		  let ieRange = document.selection.createRange();
@@ -51,7 +61,7 @@ class Home extends Component {
 		  ieRange.select();
 		} else if (br == "ff") {
 			txtarea.selectionStart = strPos;
-			txtarea.selectionEnd = strPos - 1;
+			txtarea.selectionEnd = strPos;
 			txtarea.focus();
 		}
 	  
@@ -113,10 +123,10 @@ is only available from another source
 E: Package 'python-virtualenv' has no installation candidate
 \`\`\`
 > For this, add \`deb http://us.archive.ubuntu.com/ubuntu/ trusty main restricted universe\` to /etc/apt/sources.list`;
-		this.setState({
-			markdown,
-			html: this.converter.makeHtml(markdown)
-		});
+		// this.setState({
+		// 	markdown,
+		// 	html: this.converter.makeHtml(markdown)
+		// });
 	}
 	componentDidUpdate () {
 		// This is required if route changes
@@ -141,26 +151,29 @@ E: Package 'python-virtualenv' has no installation candidate
 		}
 		);
 	}
-	handleHeadingClick = (e) => {
+	handleHeadingClick = (e, type) => {
 		this.setState({
 			showHeading: !this.state.showHeading
 		});
 		if (!e.target.id) {
-			this.insertAtCaret('markdownEditor', '#  ');
+			this.insertAtCaret('markdownEditor', `${type} `, 'heading');
 		}
 	}
 	handleItalicClick = () => {
-		this.insertAtCaret('markdownEditor', "__");
+		this.insertAtCaret('markdownEditor', "__", 'italic');
+	}
+	handleBoldClick = () => {
+		this.insertAtCaret('markdownEditor', "****", 'bold');
 	}
 	render() {
 		const { showHeading } = this.state;
 		const Heading = () => {
 			return showHeading ?  (
 				<div className="heading-dropdown">
-					<li> <h1  onClick={this.handleHeadingClick}>H1</h1></li>
-					<li> <h2>H2</h2></li>
-					<li> <h3>H3</h3></li>
-					<li> <h4>H4</h4></li>
+					<li> <h1  onClick={(e) => this.handleHeadingClick(e, '#')}>H1</h1></li>
+					<li> <h2 onClick={(e) => this.handleHeadingClick(e, '##')}>H2</h2></li>
+					<li> <h3 onClick={(e) => this.handleHeadingClick(e, '###')}>H3</h3></li>
+					<li> <h4 onClick={(e) => this.handleHeadingClick(e, '####')}>H4</h4></li>
 				</div>) : null;
 		};
 		return (
@@ -169,7 +182,7 @@ E: Package 'python-virtualenv' has no installation candidate
 					<i className="fas fa-heading" onClick={this.handleHeadingClick} id="headingIcon"/>
 					<Heading />
 					<i className="fas fa-italic" onClick={this.handleItalicClick} />
-					<i className="fas fa-bold" onClick={this.handleHeadingClick}/>
+					<i className="fas fa-bold" onClick={this.handleBoldClick}/>
 					<i className="fas fa-strikethrough" onClick={this.handleHeadingClick}/>
 					<i className="fas fa-code" onClick={this.handleHeadingClick}/>
 					<i className="fas fa-table" onClick={this.handleHeadingClick}/>
