@@ -156,7 +156,7 @@ E: Package 'python-virtualenv' has no installation candidate
 			showHeading: !this.state.showHeading
 		});
 		if (!e.target.id) {
-			this.insertAtCaret('markdownEditor', `${type} `, 'heading');
+			this.insertAtCaret('markdownEditor', `\n${type} `, 'heading');
 		}
 	}
 	handleItalicClick = () => {
@@ -170,7 +170,37 @@ E: Package 'python-virtualenv' has no installation candidate
 	}
 
 	handleCodeClick = () => {
-		this.insertAtCaret('markdownEditor', "``", 'italic');
+		this.insertAtCaret('markdownEditor', " ``", 'italic');
+	}
+	handleTableClick = () => {
+		const table = `\n| heading 1 | heading 2 |\n| --------- | ----------  |\n|     row1     |     row 2     |`;
+		this.insertAtCaret('markdownEditor', table, 'table');
+	}
+
+	handleQuoteClick = () => {
+		this.insertAtCaret('markdownEditor', '\n> ', 'quote');
+	}
+	handleListClick = () => {
+		this.insertAtCaret('markdownEditor', '\n- ', 'list');
+	}
+
+	handleListNumberClick = () => {
+		this.insertAtCaret('markdownEditor', '\n1. ', 'listNumber');
+	}
+
+	handleToDoClick = () => {
+		this.insertAtCaret('markdownEditor', '\n- [] Demo List\n- [x] Demo List completed', 'todo');
+	}
+
+	handleTextAlignClick = (align) => {
+
+	}
+
+	handleUndoReDo = (action) => {
+
+	}
+	handleImageClick = () => {
+		this.insertAtCaret('markdownEditor', '![alt msg<>](url =100x100)', 'image');
 	}
 	render() {
 		const { showHeading } = this.state;
@@ -192,18 +222,18 @@ E: Package 'python-virtualenv' has no installation candidate
 					<i className="fas fa-bold" onClick={this.handleBoldClick}/>
 					<i className="fas fa-strikethrough" onClick={this.handleStrikeClick}/>
 					<i className="fas fa-code" onClick={this.handleCodeClick}/>
-					<i className="fas fa-table" onClick={this.handleHeadingClick}/>
-					<i className="fas fa-image" onClick={this.handleHeadingClick}/>
-					<i className="fas fa-quote-right" onClick={this.handleHeadingClick}/>
-					<i className="fas fa-list-ul" onClick={this.handleHeadingClick}/>
-					<i className="fas fa-list-ol" onClick={this.handleHeadingClick}/>
-					<i className="fas fa-th-list" onClick={this.handleHeadingClick}/>
+					<i className="fas fa-table" onClick={this.handleTableClick}/>
+					<i className="fas fa-image" onClick={this.handleImageClick}/>
+					<i className="fas fa-quote-right" onClick={this.handleQuoteClick}/>
+					<i className="fas fa-list-ul" onClick={this.handleListClick}/>
+					<i className="fas fa-list-ol" onClick={this.handleListNumberClick}/>
+					<i className="fas fa-th-list" onClick={this.handleToDoClick}/>
 					<div className="right">
-						<i className="fas fa-align-left" onClick={this.handleHeadingClick}/>
-						<i className="fas fa-align-center" onClick={this.handleHeadingClick}/>
-						<i className="fas fa-align-right" onClick={this.handleHeadingClick}/>
-						<i className="fas fa-redo" onClick={this.handleHeadingClick}/>
-						<i className="fas fa-undo" onClick={this.handleHeadingClick}/>
+						<i className="fas fa-align-left" onClick={(e) => this.handleTextAlignClick(e, 'left')}/>
+						<i className="fas fa-align-center" onClick={(e) => this.handleTextAlignClick(e, 'center')}/>
+						<i className="fas fa-align-right" onClick={(e) => this.handleTextAlignClick(e, 'right')}/>
+						<i className="fas fa-redo" onClick={(e) => this.handleUndoRedoClick(e, 'redo')}/>
+						<i className="fas fa-undo" onClick={(e) => this.handleUndoRedoClick(e, 'undo')}/>
 					</div>
 				</div>
 				<textarea

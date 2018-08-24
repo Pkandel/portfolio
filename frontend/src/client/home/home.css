@@ -4,7 +4,7 @@
   margin-top: 50px; }
 
 .home-component li {
-  display: block; }
+  display: list-item; }
 
 .home-component img[alt$=">"] {
   float: right; }
