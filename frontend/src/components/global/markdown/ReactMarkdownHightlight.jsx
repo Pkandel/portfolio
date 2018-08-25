@@ -220,11 +220,13 @@ class ReactMarkdownHightlight extends Component {
 						onChange={this.handleChange}
 					/>
 				</div>
-				
-				<div className="markdown-preview">
-					<div className="preview-head"> Preview </div>
-					<div dangerouslySetInnerHTML={{ __html: `${this.state.html}`}}  className="preview-content"/>
-				</div>
+				{ previewStyle !== 'tabl' && (
+					<div className="markdown-preview">
+						<div className="preview-head"> Preview </div>
+						<div dangerouslySetInnerHTML={{ __html: `${this.state.html}`}}  className="preview-content"/>
+					</div>
+				) }
+
 			</div>
 		);
 	}

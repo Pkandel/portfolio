@@ -9,7 +9,82 @@
     &:hover {
     box-shadow: 0px 1px 1px 1px;
     }
-}
+
+        // supporting css
+
+        li {
+            display: list-item;
+        }
+        img[alt$=">"] {
+            float:right;
+          }
+          
+          img[alt$="<"] {
+            float:left;
+          }
+          
+          img[alt$="<>"] {
+              display: block;
+              max-width: 100%;
+              height: auto;
+              margin: auto;
+              float: none!important;
+          }
+          p {
+            code {
+                 color: #c7254e !important;
+                 background-color: #f9f2f4;
+                 border-radius: 4px;
+                 padding: 2px;
+                 display: inline;
+                 * {
+                 color: #c7254e !important;
+                 }
+              }
+          }
+          blockquote {
+            background: #eee;
+            line-height: 40px;
+            padding-left: 15px;
+            border-left: 5px solid #2a2a;
+        }
+    
+          table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 1rem;
+            background-color: transparent;
+            box-shadow: 0px 2px 1px 2px;
+            thead {
+                th {
+                    vertical-align: bottom;
+                    border-bottom: 2px solid #dee2e6;
+                }
+            }
+            th,
+            td {
+                padding: 0.75rem;
+                vertical-align: top;
+                border-top: 1px solid #dee2e6;
+            }
+            tbody {
+                border-top: 2px solid #dee2e6;
+                tr:nth-of-type(odd) {
+                    background-color: rgba(0, 0, 0, 0.05);
+                }
+                tr:nth-of-type(even) {
+                    background-color: rgba(255, 255, 255, 0.05);
+                }
+                tr {
+                    &:hover {
+                        background-color: rgba(0, 0, 0, 0.075);
+                    }
+                }
+            }
+        }
+    
+    
+    }
     .markdown-editor {
         .icon {
             background: #eee;
@@ -80,89 +155,13 @@
             padding-left:12px;
             height: 30px;
             border-bottom: 1px solid #aaa;
-            position: absolute;
         }
         .preview-content {
-            margin-top: 30px;
             overflow: auto;
             padding: 6px 8px;
             width: 100%;
         }
     }
-
-    // supporting css
-
-    li {
-        display: list-item;
-    }
-    img[alt$=">"] {
-        float:right;
-      }
-      
-      img[alt$="<"] {
-        float:left;
-      }
-      
-      img[alt$="<>"] {
-          display: block;
-          max-width: 100%;
-          height: auto;
-          margin: auto;
-          float: none!important;
-      }
-      p {
-        code {
-             color: #c7254e !important;
-             background-color: #f9f2f4;
-             border-radius: 4px;
-             padding: 2px;
-             display: inline;
-             * {
-             color: #c7254e !important;
-             }
-          }
-      }
-      blockquote {
-        background: #eee;
-        line-height: 40px;
-        padding-left: 15px;
-        border-left: 5px solid #2a2a;
-    }
-
-      table {
-        width: 100%;
-        max-width: 100%;
-        margin-bottom: 1rem;
-        background-color: transparent;
-        box-shadow: 0px 2px 1px 2px;
-        thead {
-            th {
-                vertical-align: bottom;
-                border-bottom: 2px solid #dee2e6;
-            }
-        }
-        th,
-        td {
-            padding: 0.75rem;
-            vertical-align: top;
-            border-top: 1px solid #dee2e6;
-        }
-        tbody {
-            border-top: 2px solid #dee2e6;
-            tr:nth-of-type(odd) {
-                background-color: rgba(0, 0, 0, 0.05);
-            }
-            tr:nth-of-type(even) {
-                background-color: rgba(255, 255, 255, 0.05);
-            }
-            tr {
-                &:hover {
-                    background-color: rgba(0, 0, 0, 0.075);
-                }
-            }
-        }
-    }
-
 
 
 .preview-tab {
@@ -188,7 +187,6 @@
                 position: relative;
             }
             .preview-content {
-                margin-top: 0px;
                 min-height: 400px;
                 overflow: auto;
             }
