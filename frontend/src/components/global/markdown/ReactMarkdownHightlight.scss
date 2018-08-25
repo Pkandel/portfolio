@@ -70,8 +70,8 @@
     .markdown-preview {
         min-height: calc(100% - 30px);
         height: auto;
-        border-left: 2px solid #eee;
         overflow: auto;
+        border-left: 2px solid #eee;
         .preview-head {
             background: #eee;
             height: 30px;
@@ -80,8 +80,11 @@
             padding-left:12px;
             height: 30px;
             border-bottom: 1px solid #aaa;
+            position: absolute;
         }
         .preview-content {
+            margin-top: 30px;
+            overflow: auto;
             padding: 6px 8px;
             width: 800px;
         }
