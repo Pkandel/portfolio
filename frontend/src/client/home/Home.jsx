@@ -77,6 +77,7 @@ class Home extends Component {
 			}
 		});
 		hljs.initHighlightingOnLoad();
+		// hljs.initLineNumbersOnLoad();
 		// set initial markup
 		const markdown = `
 ## How to setup HTTPS ( Ubuntu 18)
@@ -123,10 +124,10 @@ is only available from another source
 E: Package 'python-virtualenv' has no installation candidate
 \`\`\`
 > For this, add \`deb http://us.archive.ubuntu.com/ubuntu/ trusty main restricted universe\` to /etc/apt/sources.list`;
-		// this.setState({
-		// 	markdown,
-		// 	html: this.converter.makeHtml(markdown)
-		// });
+		this.setState({
+			markdown,
+			html: this.converter.makeHtml(markdown)
+		});
 	}
 	componentDidUpdate () {
 		// This is required if route changes
@@ -196,7 +197,7 @@ E: Package 'python-virtualenv' has no installation candidate
 
 	}
 
-	handleUndoReDo = (action) => {
+	handleUndoRedoClick = (action) => {
 
 	}
 	handleImageClick = () => {
@@ -207,10 +208,10 @@ E: Package 'python-virtualenv' has no installation candidate
 		const Heading = () => {
 			return showHeading ?  (
 				<div className="heading-dropdown">
-					<li> <h1  onClick={(e) => this.handleHeadingClick(e, '#')}>H1</h1></li>
-					<li> <h2 onClick={(e) => this.handleHeadingClick(e, '##')}>H2</h2></li>
-					<li> <h3 onClick={(e) => this.handleHeadingClick(e, '###')}>H3</h3></li>
-					<li> <h4 onClick={(e) => this.handleHeadingClick(e, '####')}>H4</h4></li>
+					 <h1  onClick={(e) => this.handleHeadingClick(e, '#')}>H1</h1>
+					 <h2 onClick={(e) => this.handleHeadingClick(e, '##')}>H2</h2>
+					 <h3 onClick={(e) => this.handleHeadingClick(e, '###')}>H3</h3>
+					 <h4 onClick={(e) => this.handleHeadingClick(e, '####')}>H4</h4>
 				</div>) : null;
 		};
 		return (
