@@ -36,7 +36,7 @@
               margin: auto;
               float: none!important;
           }
-          p {
+          *:not(pre) {
             code {
                  color: #c7254e !important;
                  background-color: #f9f2f4;

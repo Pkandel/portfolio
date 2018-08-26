@@ -89,7 +89,7 @@ class ReactMarkdownHightlight extends Component {
 - add ability to undo and redo
 - add function for all the buttons when text is selected in the clipboard
 - make table more attractive by displaying the hover option
-- Add preview option for tab, horizontal and vertical
+- Add option for exporting component \`how to access input and preview from parent component\`
 - Add different theme option by selecting the name 
 
 > Code Refactor
