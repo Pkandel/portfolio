@@ -6,6 +6,12 @@
     max-height: 80vh;
     border-radius: 6px;
     border: 1px solid #ddd;
+    // this is for default 
+    display: flex; 
+    flex-direction: row;
+    div {
+        flex: 1;
+    }
     &:hover {
     box-shadow: 0px 1px 1px 1px;
     }
@@ -165,7 +171,32 @@
 
 
 .preview-tab {
+   display: block;
+    .markdown-editor {
+        min-height: 400px;
+        textarea {
+            min-height: 400px;
+        }
+    }
+    .markdown-preview {
+        min-height: 400px;
+        .preview-content {
+          min-height: 400px;
+        }
+    }
+    .tab {
+        float: right;
+        .tab-button {
+            cursor: pointer;
+            background: #eee;
+            padding: 4px 6px;
+            outline: none;
+            &:hover {
 
+                box-shadow: 0px 4px 4px #ccc;
+            }
+        }
+    }
 }
 .preview-horizontal {
     width:80%;

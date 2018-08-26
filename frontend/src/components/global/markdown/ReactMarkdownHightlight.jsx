@@ -16,25 +16,25 @@ class ReactMarkdownHightlight extends Component {
 			showHeading: false
 		};
 	}
-	 insertAtCaret(areaId, text, type) {
+	insertAtCaret(areaId, text, type) {
 		let txtarea = document.getElementById(areaId);
 		if (!txtarea) {
-		  return;
+			return;
 		}
-	  
+
 		let scrollPos = txtarea.scrollTop;
 		let strPos = 0;
 		let br = ((txtarea.selectionStart || txtarea.selectionStart == '0') ?
-		  "ff" : (document.selection ? "ie" : false));
+			"ff" : (document.selection ? "ie" : false));
 		if (br == "ie") {
-		  txtarea.focus();
-		  let range = document.selection.createRange();
-		  range.moveStart('character', -txtarea.value.length);
-		  strPos = range.text.length;
+			txtarea.focus();
+			let range = document.selection.createRange();
+			range.moveStart('character', -txtarea.value.length);
+			strPos = range.text.length;
 		} else if (br == "ff") {
-		  strPos = txtarea.selectionStart;
+			strPos = txtarea.selectionStart;
 		}
-	  
+
 		let front = (txtarea.value).substring(0, strPos);
 		let back = (txtarea.value).substring(strPos, txtarea.value.length);
 		txtarea.value = front + text + back;
@@ -44,30 +44,30 @@ class ReactMarkdownHightlight extends Component {
 		strPos = strPos + text.length;
 		switch (type) {
 			case 'italic':
-				strPos =strPos - 1;
+				strPos = strPos - 1;
 				break;
 			case 'bold':
-				strPos = strPos -2;
+				strPos = strPos - 2;
 				break;
 			default:
 				break;
 		}
 		if (br == "ie") {
-		  txtarea.focus();
-		  let ieRange = document.selection.createRange();
-		  ieRange.moveStart('character', -txtarea.value.length);
-		  ieRange.moveStart('character', strPos);
-		  ieRange.moveEnd('character', 0);
-		  ieRange.select();
+			txtarea.focus();
+			let ieRange = document.selection.createRange();
+			ieRange.moveStart('character', -txtarea.value.length);
+			ieRange.moveStart('character', strPos);
+			ieRange.moveEnd('character', 0);
+			ieRange.select();
 		} else if (br == "ff") {
 			txtarea.selectionStart = strPos;
 			txtarea.selectionEnd = strPos;
 			txtarea.focus();
 		}
-	  
+
 		txtarea.scrollTop = scrollPos;
 
-	  }
+	}
 	componentDidMount() {
 		document.addEventListener('click', (el) => {
 			if (el.target.id !== 'headingIcon') {
@@ -98,10 +98,11 @@ class ReactMarkdownHightlight extends Component {
 	`;
 		this.setState({
 			markdown,
-			html: this.converter.makeHtml(markdown)
+			html: this.converter.makeHtml(markdown),
+			state: this.props.previewStyle === 'tab' ? 'markdown' : null
 		});
 	}
-	componentDidUpdate () {
+	componentDidUpdate() {
 		// This is required if route changes
 		const code = document.querySelectorAll('code');
 		if (code.length) {
@@ -175,58 +176,81 @@ class ReactMarkdownHightlight extends Component {
 	handleImageClick = () => {
 		this.insertAtCaret('markdownEditor', '![alt msg<>](url =100x100)', 'image');
 	}
-	render() {
-		const { showHeading } = this.state;
-		const { previewStyle } = this.props;
-		const markdownStyle = `markdown-root preview-${previewStyle}`;
 
+	handleToggle = (state) => {
+		this.setState({
+			state
+		});
+	}
+	MarkdownEditor = () => {
+		const { showHeading } = this.state;
 		const Heading = () => {
-			return showHeading ?  (
+			return showHeading ? (
 				<div className="heading-dropdown">
-					 <h1  onClick={(e) => this.handleHeadingClick(e, '#')}>H1</h1>
-					 <h2 onClick={(e) => this.handleHeadingClick(e, '##')}>H2</h2>
-					 <h3 onClick={(e) => this.handleHeadingClick(e, '###')}>H3</h3>
-					 <h4 onClick={(e) => this.handleHeadingClick(e, '####')}>H4</h4>
+					<h1 onClick={(e) => this.handleHeadingClick(e, '#')}>H1</h1>
+					<h2 onClick={(e) => this.handleHeadingClick(e, '##')}>H2</h2>
+					<h3 onClick={(e) => this.handleHeadingClick(e, '###')}>H3</h3>
+					<h4 onClick={(e) => this.handleHeadingClick(e, '####')}>H4</h4>
 				</div>) : null;
 		};
 		return (
-			<div className={markdownStyle} id="markdownRoot">
-				<div className="markdown-editor">
-					<div className="icon">
-						<i className="fas fa-heading" onClick={this.handleHeadingClick} id="headingIcon"/>
-						<Heading />
-						<i className="fas fa-italic" onClick={this.handleItalicClick} />
-						<i className="fas fa-bold" onClick={this.handleBoldClick}/>
-						<i className="fas fa-strikethrough" onClick={this.handleStrikeClick}/>
-						<i className="fas fa-code" onClick={this.handleCodeClick}/>
-						<i className="fas fa-table" onClick={this.handleTableClick}/>
-						<i className="fas fa-image" onClick={this.handleImageClick}/>
-						<i className="fas fa-quote-right" onClick={this.handleQuoteClick}/>
-						<i className="fas fa-list-ul" onClick={this.handleListClick}/>
-						<i className="fas fa-list-ol" onClick={this.handleListNumberClick}/>
-						<i className="fas fa-th-list" onClick={this.handleToDoClick}/>
-						<div className="right">
-							<i className="fas fa-align-left" onClick={(e) => this.handleTextAlignClick(e, 'left')}/>
-							<i className="fas fa-align-center" onClick={(e) => this.handleTextAlignClick(e, 'center')}/>
-							<i className="fas fa-align-right" onClick={(e) => this.handleTextAlignClick(e, 'right')}/>
-							<i className="fas fa-redo" onClick={(e) => this.handleUndoRedoClick(e, 'redo')}/>
-							<i className="fas fa-undo" onClick={(e) => this.handleUndoRedoClick(e, 'undo')}/>
-						</div>
+			<div className="markdown-editor">
+				<div className="icon">
+					<i className="fas fa-heading" onClick={this.handleHeadingClick} id="headingIcon" />
+					<Heading />
+					<i className="fas fa-italic" onClick={this.handleItalicClick} />
+					<i className="fas fa-bold" onClick={this.handleBoldClick} />
+					<i className="fas fa-strikethrough" onClick={this.handleStrikeClick} />
+					<i className="fas fa-code" onClick={this.handleCodeClick} />
+					<i className="fas fa-table" onClick={this.handleTableClick} />
+					<i className="fas fa-image" onClick={this.handleImageClick} />
+					<i className="fas fa-quote-right" onClick={this.handleQuoteClick} />
+					<i className="fas fa-list-ul" onClick={this.handleListClick} />
+					<i className="fas fa-list-ol" onClick={this.handleListNumberClick} />
+					<i className="fas fa-th-list" onClick={this.handleToDoClick} />
+					<div className="right">
+						<i className="fas fa-align-left" onClick={(e) => this.handleTextAlignClick(e, 'left')} />
+						<i className="fas fa-align-center" onClick={(e) => this.handleTextAlignClick(e, 'center')} />
+						<i className="fas fa-align-right" onClick={(e) => this.handleTextAlignClick(e, 'right')} />
+						<i className="fas fa-redo" onClick={(e) => this.handleUndoRedoClick(e, 'redo')} />
+						<i className="fas fa-undo" onClick={(e) => this.handleUndoRedoClick(e, 'undo')} />
 					</div>
-					<textarea
-						name="markdown"
-						id="markdownEditor"
-						value={this.state.markdown}
-						onChange={this.handleChange}
-					/>
 				</div>
-				{ previewStyle !== 'tabl' && (
-					<div className="markdown-preview">
-						<div className="preview-head"> Preview </div>
-						<div dangerouslySetInnerHTML={{ __html: `${this.state.html}`}}  className="preview-content"/>
-					</div>
-				) }
+				<textarea
+					name="markdown"
+					id="markdownEditor"
+					value={this.state.markdown}
+					onChange={this.handleChange}
+				/>
+			</div>
+		);
+	}
+	TabGroup = () => {
+		return (
+			<div className="tab">
+				<button className="tab-button" onClick={() => this.handleToggle('preview')}>Preview</button>
+				<button className="tab-button" onClick={() => this.handleToggle('markdown')}>Code</button>
+			</div>);
+	}
 
+	PreviewPanel = () => {
+		return (
+			<div className="markdown-preview">
+				<div className="preview-head"> Preview </div>
+				<div dangerouslySetInnerHTML={{ __html: `${this.state.html}` }} className="preview-content" />
+			</div>
+		);
+	}
+	render() {
+		const { state } = this.state;
+		const { previewStyle } = this.props;
+		const markdownStyle = `markdown-root preview-${previewStyle}`;
+		const { MarkdownEditor, TabGroup, PreviewPanel } = this;
+		return (
+			<div className={markdownStyle} id="markdownRoot">
+				{ state && state !== 'markdown' ?  null : <MarkdownEditor /> }
+				{ state && state !== 'preview' ? null : <PreviewPanel /> }
+				{ state && <TabGroup /> }
 			</div>
 		);
 	}

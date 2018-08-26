@@ -9,7 +9,7 @@ class Home extends Component {
 	
 	render() {
 		
-		return <Markdown previewStyle="horizontal"/>;
+		return <Markdown previewStyle="vertical"/>;
 
 	}
 }
