@@ -80,7 +80,7 @@ class ReactMarkdownHightlight extends Component {
 		// hljs.initLineNumbersOnLoad();
 		// set initial markup
 		const markdown = `
-# These are current todos
+# These are the current todos
 
 > Features
 
@@ -247,9 +247,11 @@ class ReactMarkdownHightlight extends Component {
 		const markdownStyle = `markdown-root preview-${previewStyle}`;
 		const { MarkdownEditor, TabGroup, PreviewPanel } = this;
 		return (
-			<div className={markdownStyle} id="markdownRoot">
-				{ state && state !== 'markdown' ?  null : <MarkdownEditor /> }
-				{ state && state !== 'preview' ? null : <PreviewPanel /> }
+			<div>
+				<div className={markdownStyle} id="markdownRoot">
+					{ state && state !== 'markdown' ?  null : <MarkdownEditor /> }
+					{ state && state !== 'preview' ? null : <PreviewPanel /> }
+				</div>
 				{ state && <TabGroup /> }
 			</div>
 		);

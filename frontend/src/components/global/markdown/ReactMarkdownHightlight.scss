@@ -172,29 +172,33 @@
 
 .preview-tab {
    display: block;
+   overflow: auto;
     .markdown-editor {
-        min-height: 400px;
+        min-height: 80vh;
         textarea {
-            min-height: 400px;
+            min-height: 75vh;
         }
     }
     .markdown-preview {
-        min-height: 400px;
+        min-height: 80vh;
         .preview-content {
-          min-height: 400px;
+          min-height: 80vh;
         }
     }
-    .tab {
-        float: right;
-        .tab-button {
-            cursor: pointer;
-            background: #eee;
-            padding: 4px 6px;
-            outline: none;
-            &:hover {
 
-                box-shadow: 0px 4px 4px #ccc;
-            }
+}
+.tab {
+    text-align: right;
+    width: 90%;
+    margin:auto;
+    .tab-button {
+        cursor: pointer;
+        background: #eee;
+        padding: 4px 6px;
+        outline: none;
+        &:hover {
+
+            box-shadow: 0px 4px 4px #ccc;
         }
     }
 }
@@ -215,9 +219,11 @@
             min-height: 400px;
             overflow: auto;
             .preview-head {
-                position: relative;
+                position: absolute;
+                width: 79.5%;
             }
             .preview-content {
+                margin-top: 20px;
                 min-height: 400px;
                 overflow: auto;
             }
