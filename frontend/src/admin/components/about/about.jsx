@@ -10,20 +10,28 @@ class About extends Component {
 		super(props);
 		this.state = {
 			id: 0,
+			educationId: 0,
+			experienceId: 0,
 			addSkill: 0,
 			activeTab: 1,
 			disablePrev: true,
 			disableNext: false,
+			educationArray: [],
+			experienceArray: [],
 			SkillArray: []
 		};
 	}
+	initializeArray = (name) => {
+		const arr = [...this.state[`${name}Array`]];
+		arr.push({data: {}, id: ++this.state[`${name}Id`] });
+		this.setState({
+			[`${name}Array`]: arr
+		});
+	}
 
 	componentDidMount() {
-		const SkillArray = [...this.state.SkillArray];
-		SkillArray.push({data: {}, id: ++this.state.id });
-		this.setState({
-			SkillArray
-		});
+		this.initializeArray('education');
+		this.initializeArray('experience');
 	}
     handleSubmit = () => {
     	console.log('Form submitted');
@@ -58,35 +66,34 @@ class About extends Component {
     	this.checkDisable();
     }
 
-    handleSkillAdd = () => {
-    	const SkillArray = [ ...this.state.SkillArray ];
-    	SkillArray.push({data: {}, id: ++this.state.id });
-    	this.setState({
-    		SkillArray
-    	});
+    handleSkillAdd = (name) => {
+	 this.initializeArray(name);
     }
 
     handleSkillChange = () => {
         
     }
-    handleRemove = (key) => {
-    	let SkillArray = this.state.SkillArray;
-    	SkillArray = SkillArray.filter(({id}) => id !== key );
-    	this.setState({ SkillArray });
+    handleRemove = (key, name) => {
+    	let arr = this.state[`${name}Array`];
+    	arr = arr.filter(({id}) => id !== key );
+    	this.setState({ [`${name}Array`]: arr });
     }
     render() {
-    	const { activeTab, disablePrev, disableNext, SkillArray } = this.state;
+    	const { activeTab, disablePrev, disableNext, experienceArray, educationArray } = this.state;
     	return (
     		<Layout>
     			<Tabs activeKey={`${activeTab}`} onTabClick={this.handleTabClick} >
     				<TabPane tab={<span><Icon type="apple" />Experience</span>} key="1" >
-    					{SkillArray.map(({ data, id }) => <Experience key={id} id={id} handleRemove={this.handleRemove} onChange={this.handleSkillChange}/>)}
+    					{experienceArray.map(({ data, id }) => <Experience key={id} id={id} handleRemove={() => this.handleRemove(id, 'experience')} onChange={this.handleSkillChange}/>)}
     					<div className="center">
-    						<Button type="default" onClick={this.handleSkillAdd}>Add More <Icon type="plus-circle-o" /></Button>
+    						<Button type="default" onClick={() => this.handleSkillAdd('experience')}>Add More <Icon type="plus-circle-o" /></Button>
     					</div>
     				</TabPane>
     				<TabPane tab={<span><Icon type="android" />Education</span>} key="2" >
-                        Tab 2
+					{educationArray.map(({ data, id }) => <Experience key={id} id={id} handleRemove={() => this.handleRemove(id, 'education')} onChange={this.handleSkillChange}/>)}
+    					<div className="center">
+    						<Button type="default" onClick={() => this.handleSkillAdd('education')}>Add More <Icon type="plus-circle-o" /></Button>
+    					</div>
     				</TabPane>
     			</Tabs>
     			<Footer style={{ textAlign: 'center', padding: '15px 40px 45px 40px' }}>
