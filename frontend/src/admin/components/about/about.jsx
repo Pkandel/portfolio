@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import  Skill  from '../skill';
+import  Education  from './Education';
+import Experience from './Experience';
 import { Tabs, Icon, Button, Layout } from 'antd';
 const TabPane = Tabs.TabPane,
 	{ Footer } = Layout;
@@ -79,7 +80,7 @@ class About extends Component {
     		<Layout>
     			<Tabs activeKey={`${activeTab}`} onTabClick={this.handleTabClick} >
     				<TabPane tab={<span><Icon type="apple" />Experience</span>} key="1" >
-    					{SkillArray.map(({ data, id }) => <Skill key={id} id={id} handleRemove={this.handleRemove} onChange={this.handleSkillChange}/>)}
+    					{SkillArray.map(({ data, id }) => <Experience key={id} id={id} handleRemove={this.handleRemove} onChange={this.handleSkillChange}/>)}
     					<div className="center">
     						<Button type="default" onClick={this.handleSkillAdd}>Add More <Icon type="plus-circle-o" /></Button>
     					</div>
