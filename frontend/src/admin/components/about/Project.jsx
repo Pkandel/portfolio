@@ -17,9 +17,6 @@ class Project extends Component {
 
     handleChange = (e) => {
         const { name, value } = e.target;
-        this.setState({
-            [name]: name === 'still_working' ? !this.state.still_working : value
-        });
         // setTimeout(() => {
         //     console.log(this.state);
         // });
@@ -31,7 +28,7 @@ class Project extends Component {
 
     render() {
         const { id } = this.props;
-        const { office_url, still_working, title, start_date, description } = this.state;
+        const { company_name, demo_url, source_code, role_description, project_description, technology_used, project_name } = this.state;
         const Cross = () => (<div> Title
     	{id !== 1 && <Icon type="close" style={{ float: 'right', paddingRight: 20 }} onClick={() => this.handleRemove(id)} />}
         </div>);
@@ -42,40 +39,70 @@ class Project extends Component {
                     <Form className="login-form" onSubmit={this.handleSubmit} >
                         <FormItem>
                             <Input
-                                placeholder="Office URL"
+                                placeholder="Project Name"
                                 size="large"
                                 addonAfter={"*"}
-                                name="office_url"
-                                value={office_url}
+                                name="project_name"
+                                value={project_name}
                                 onChange={this.handleChange}
                             />
                         </FormItem>
                         <FormItem>
                             <Input
-                                placeholder="Job Title (Javascript Developer)"
+                                placeholder="Company Name"
                                 size="large"
-                                name="title"
-                                value={title}
+                                name="company_name"
+                                value={company_name}
+                                onChange={this.handleChange}
+                            />
+                        </FormItem>
+                        <FormItem>
+                            <Input
+                                placeholder="Role Description"
+                                size="large"
+                                name="role_description"
+                                value={role_description}
                                 addonAfter={"*"}
                             />
                         </FormItem>
                         <FormItem>
-                            {still_working
-                                ? <DatePicker placeholder="Start Date" name="start_date" onChange={this.handleChange} />
-                                : <RangePicker onChange={this.onDateChange} />
-                            }
-                            <div className="right">
-                                <Checkbox onChange={this.handleChange} name="still_working" >Still Working </Checkbox>
-                            </div>
+                            <Input
+                                placeholder="Technology Used"
+                                size="large"
+                                name="technology_used"
+                                value={technology_used}
+                                addonAfter={"*"}
+                            />
                         </FormItem>
                         <FormItem>
                             <TextArea
-                                placeholder="Role Description"
+                                placeholder="Project Description"
                                 rows={4}
-                                name="description"
-                                value={description}
+                                name="project_description"
+                                value={project_description}
 
                             />
+                        </FormItem>
+                        <FormItem>
+                            <Input
+                                placeholder="Source Code URL"
+                                size="large"
+                                name="source_code"
+                                value={source_code}
+                            />
+                        </FormItem>
+                        <FormItem>
+                            <Input
+                                placeholder="Demo URL"
+                                size="large"
+                                name="demo_url"
+                                value={demo_url}
+                            />
+                        </FormItem>
+                        <FormItem>
+                            <div className="right">
+                                <Checkbox onChange={this.handleChange} name="public" >Is Public</Checkbox>
+                            </div>
                         </FormItem>
                     </Form>
                 </Panel>

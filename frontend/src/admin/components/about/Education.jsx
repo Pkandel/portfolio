@@ -75,8 +75,8 @@ class Education extends Component {
                             />
                         </FormItem>
                         <FormItem>
-                        <div className="right">
-                                <Checkbox onChange={this.handleChange} name="is_public" >Public</Checkbox>
+                            <div className="right">
+                                <Checkbox onChange={this.handleChange} name="public" >Is Public</Checkbox>
                             </div>
                         </FormItem>
                     </Form>

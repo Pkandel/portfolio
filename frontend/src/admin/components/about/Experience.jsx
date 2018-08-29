@@ -74,6 +74,11 @@ class Experience extends Component {
 
                             />
                         </FormItem>
+                        <FormItem>
+                            <div className="right">
+                                <Checkbox onChange={this.handleChange} name="public" >Is Public</Checkbox>
+                            </div>
+                        </FormItem>
                     </Form>
                 </Panel>
             </Collapse>
