@@ -26,10 +26,6 @@ module.exports = {
 		filename: 'bundle.js',
 		publicPath: '/'
 	},
-	devServer: {
-		contentBase: path.resolve(__dirname, dev ? 'src' : 'dist')
-
-	},
 	target: 'web',
 	devtool: dev ? 'cheap-module-inline-source-map' : 'source-map',
 	plugins: dev ? [

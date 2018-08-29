@@ -21,7 +21,6 @@ class About extends Component {
 			educationArray: [],
 			experienceArray: [],
 			projectArray: [],
-			SkillArray: []
 		};
 	}
 	initializeArray = (name) => {
@@ -104,7 +103,7 @@ class About extends Component {
 					<TabPane tab={<span><Icon type="android" />Education</span>} key="2" >
 						{
 							educationArray.map(({ data, id }) =>
-								<Experience
+								<Education
 									key={id}
 									id={id}
 									handleRemove={() => this.handleRemove(id, 'education')}
@@ -115,7 +114,7 @@ class About extends Component {
 							<Button type="default" onClick={() => this.handleSkillAdd('education')}>Add More <Icon type="plus-circle-o" /></Button>
 						</div>
 					</TabPane>
-					<TabPane tab={<span><Icon type="apple" />Projects</span>} key="3" >
+					<TabPane tab={<span><Icon type="smile" />Projects</span>} key="3" >
 						{
 							projectArray.map(({ data, id }) =>
 								<Project

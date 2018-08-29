@@ -20,9 +20,6 @@ class Experience extends Component {
         this.setState({
             [name]: name === 'still_working' ? !this.state.still_working : value
         });
-        setTimeout(() => {
-            console.log(this.state);
-        });
     }
 
     handleRemove = (id) => {

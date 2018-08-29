@@ -4,7 +4,7 @@ const FormItem = Form.Item,
     { TextArea } = Input,
     Panel = Collapse.Panel,
     { RangePicker } = DatePicker;
-class Experience extends Component {
+class Education extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,9 +20,6 @@ class Experience extends Component {
         this.setState({
             [name]: name === 'still_working' ? !this.state.still_working : value
         });
-        setTimeout(() => {
-            console.log(this.state);
-        });
     }
 
     handleRemove = (id) => {
@@ -31,7 +28,7 @@ class Experience extends Component {
 
     render() {
         const { id } = this.props;
-        const { office_url, still_working, title, start_date, description } = this.state;
+        const { course_name, still_working, college_name, start_date, course_description } = this.state;
         const Cross = () => (<div> Title
     	{id !== 1 && <Icon type="close" style={{ float: 'right', paddingRight: 20 }} onClick={() => this.handleRemove(id)} />}
         </div>);
@@ -42,20 +39,20 @@ class Experience extends Component {
                     <Form className="login-form" onSubmit={this.handleSubmit} >
                         <FormItem>
                             <Input
-                                placeholder="Office URL"
+                                placeholder="Course Name"
                                 size="large"
                                 addonAfter={"*"}
-                                name="office_url"
-                                value={office_url}
+                                name="course_name"
+                                value={course_name}
                                 onChange={this.handleChange}
                             />
                         </FormItem>
                         <FormItem>
                             <Input
-                                placeholder="Job Title (Javascript Developer)"
+                                placeholder="College Name"
                                 size="large"
-                                name="title"
-                                value={title}
+                                name="college_name"
+                                value={college_name}
                                 addonAfter={"*"}
                             />
                         </FormItem>
@@ -70,12 +67,17 @@ class Experience extends Component {
                         </FormItem>
                         <FormItem>
                             <TextArea
-                                placeholder="Role Description"
+                                placeholder="Course Description"
                                 rows={4}
-                                name="description"
-                                value={description}
+                                name="course_description"
+                                value={course_description}
 
                             />
+                        </FormItem>
+                        <FormItem>
+                        <div className="right">
+                                <Checkbox onChange={this.handleChange} name="is_public" >Public</Checkbox>
+                            </div>
                         </FormItem>
                     </Form>
                 </Panel>
@@ -83,4 +85,4 @@ class Experience extends Component {
         );
     }
 }
-export default Experience;
+export default Education;
