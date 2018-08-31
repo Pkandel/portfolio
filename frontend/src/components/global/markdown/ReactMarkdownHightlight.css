@@ -1,0 +1,177 @@
+.markdown-root {
+  width: 90%;
+  margin: auto;
+  margin-top: 50px;
+  min-height: 400px;
+  max-height: 80vh;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: row; }
+  .markdown-root div {
+    flex: 1; }
+  .markdown-root:hover {
+    box-shadow: 0px 1px 1px 1px; }
+  .markdown-root li {
+    display: list-item; }
+  .markdown-root img[alt$=">"] {
+    float: right; }
+  .markdown-root img[alt$="<"] {
+    float: left; }
+  .markdown-root img[alt$="<>"] {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+    float: none !important; }
+  .markdown-root *:not(pre) code {
+    color: #c7254e !important;
+    background-color: #f9f2f4;
+    border-radius: 4px;
+    padding: 2px;
+    display: inline; }
+    .markdown-root *:not(pre) code * {
+      color: #c7254e !important; }
+  .markdown-root blockquote {
+    background: #eee;
+    line-height: 40px;
+    padding-left: 15px; }
+  .markdown-root table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    box-shadow: 0px 2px 1px 2px; }
+    .markdown-root table thead th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #dee2e6; }
+    .markdown-root table th,
+    .markdown-root table td {
+      padding: 0.75rem;
+      vertical-align: top;
+      border-top: 1px solid #dee2e6; }
+    .markdown-root table tbody {
+      border-top: 2px solid #dee2e6; }
+      .markdown-root table tbody tr:nth-of-type(odd) {
+        background-color: rgba(0, 0, 0, 0.05); }
+      .markdown-root table tbody tr:nth-of-type(even) {
+        background-color: rgba(255, 255, 255, 0.05); }
+      .markdown-root table tbody tr:hover {
+        background-color: rgba(0, 0, 0, 0.075); }
+
+.markdown-editor .icon {
+  background: #eee;
+  height: 30px;
+  padding-left: 12px;
+  border-bottom: 1px solid #aaa;
+  cursor: pointer; }
+  .markdown-editor .icon i {
+    margin-right: 15px; }
+    .markdown-editor .icon i:hover {
+      color: blueviolet; }
+  .markdown-editor .icon img {
+    width: 18px;
+    height: 14px;
+    margin-bottom: 5px; }
+  .markdown-editor .icon .heading-dropdown {
+    position: absolute;
+    background: #eee;
+    margin-left: -12px;
+    padding: 0px 10px;
+    margin-top: 2px;
+    padding-bottom: 5px;
+    height: auto; }
+    .markdown-editor .icon .heading-dropdown h1,
+    .markdown-editor .icon .heading-dropdown h2,
+    .markdown-editor .icon .heading-dropdown h3,
+    .markdown-editor .icon .heading-dropdown h4 {
+      margin-top: 0;
+      margin-bottom: 0; }
+      .markdown-editor .icon .heading-dropdown h1:hover,
+      .markdown-editor .icon .heading-dropdown h2:hover,
+      .markdown-editor .icon .heading-dropdown h3:hover,
+      .markdown-editor .icon .heading-dropdown h4:hover {
+        color: blueviolet; }
+    .markdown-editor .icon .heading-dropdown .h1 {
+      font-size: 20px; }
+    .markdown-editor .icon .heading-dropdown .h2 {
+      font-size: 18px; }
+
+.markdown-editor textarea {
+  padding: 8px 12px;
+  width: 100%;
+  height: auto;
+  min-height: calc(100% - 30px);
+  border: none;
+  resize: none;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  outline: none; }
+
+.markdown-preview {
+  min-height: calc(100% - 30px);
+  width: 100%;
+  height: auto;
+  overflow: auto;
+  border-left: 2px solid #eee; }
+  .markdown-preview .preview-head {
+    background: #eee;
+    height: 30px;
+    width: 100%;
+    padding-left: 12px;
+    height: 30px;
+    border-bottom: 1px solid #aaa; }
+  .markdown-preview .preview-content {
+    overflow: auto;
+    padding: 6px 8px;
+    width: 100%; }
+
+.preview-tab {
+  display: block;
+  overflow: auto; }
+  .preview-tab .markdown-editor {
+    min-height: 80vh; }
+    .preview-tab .markdown-editor textarea {
+      min-height: 75vh; }
+  .preview-tab .markdown-preview {
+    min-height: 80vh; }
+    .preview-tab .markdown-preview .preview-content {
+      min-height: 80vh; }
+
+.tab {
+  text-align: right;
+  width: 90%;
+  margin: auto; }
+  .tab .tab-button {
+    cursor: pointer;
+    background: #eee;
+    padding: 4px 6px;
+    outline: none; }
+    .tab .tab-button:hover {
+      box-shadow: 0px 4px 4px #ccc; }
+
+.preview-horizontal {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh; }
+  .preview-horizontal div {
+    flex: 1; }
+  .preview-horizontal .markdown-editor textarea {
+    min-height: 400px; }
+  .preview-horizontal .markdown-preview {
+    min-height: 400px;
+    overflow: auto; }
+    .preview-horizontal .markdown-preview .preview-head {
+      position: absolute;
+      width: 79.5%; }
+    .preview-horizontal .markdown-preview .preview-content {
+      margin-top: 20px;
+      min-height: 400px;
+      overflow: auto; }
+
+.preview-vertical {
+  display: flex;
+  flex-direction: row; }
+  .preview-vertical div {
+    flex: 1; }

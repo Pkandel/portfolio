@@ -1,108 +1,80 @@
 /* eslint-disable no-console */
-import path from  'path';
-import webpack from  'webpack';
-import Dotenv from  'dotenv-webpack';
-import LodashModuleReplacementPlugin from  'lodash-webpack-plugin';
-import ExtractTextPlugin from  'extract-text-webpack-plugin';
-import CopyWebpackPlugin from  'copy-webpack-plugin';
+import path from 'path';
+import webpack from 'webpack';
+import Dotenv from 'dotenv-webpack';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import merge from 'webpack-merge';
+
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import {
+	BundleAnalyzerPlugin
+} from 'webpack-bundle-analyzer';
+
+// const dependencies = require('./package.json').dependencies;
+// let vendorArray = [];
+// for(const key in dependencies) {
+// 	vendorArray.push(key);
+// }
+// vendorArray = vendorArray.filter(key => key !== 'babel-polyfill');
+
+const resolve = (...args) => {
+	return path.resolve(__dirname, ...args);
+}
 
 const env = process.env.NODE_ENV || 'production';
 console.log(`Application running in ${env} mode`);
-/*
-    to send a production variable, we have to generate production before
-    application statrs like NODE_ENV=production npm start
-    other env variable we can use from .env file
-    */
 const dev = env === 'development';
-module.exports = {
-	entry: dev
-		? [
-			'webpack-hot-middleware/client?reload=true',
-			'react-hot-loader/patch',
-			path.resolve(__dirname, 'src')
-		] : path.resolve(__dirname, 'src'),
+
+const common = {
+	entry: resolve('src'),
 	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: 'bundle.js',
+		path: resolve('dist'),
+		filename: 'js/app.js',
 		publicPath: '/'
 	},
-	target: 'web',
-	devtool: dev ? 'cheap-module-inline-source-map' : 'source-map',
-	plugins: dev ? [
-		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoEmitOnErrorsPlugin(),
-		new LodashModuleReplacementPlugin(),
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify('development')
-		}),
-		new Dotenv()
-
-	] : [
-		new webpack.optimize.OccurrenceOrderPlugin(),
-		new ExtractTextPlugin('styles.css'),
-		new webpack.optimize.UglifyJsPlugin({ sourceMap: true }),
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify('production')
-		}),
-		new CopyWebpackPlugin([
-			{ from: 'public/', to: './' }
-		]),
-		new Dotenv()
-	],
 	module: {
-		rules: [
-			{
+		rules: [{
 				test: /\.jsx?$/,
-				include: [
-					path.resolve(__dirname, 'src')
-				],
-				exclude: [
-					path.resolve(__dirname, 'node_modules/'),
-					path.resolve(__dirname, 'dist/')
-				],
-				use: dev ? ['react-hot-loader/webpack', 'babel-loader'] : 'babel-loader'
-			},
-			{
-				test: /\.scss?$/,
-				include: [
-					path.resolve(__dirname, 'src')
-				],
-				exclude: [
-					path.resolve(__dirname, 'node_modules'),
-					path.resolve(__dirname, 'build')
-				],
-				use: [{
-					loader: 'style-loader' // creates style nodes from JS strings
-				}, {
-					loader: 'css-loader' // translates CSS into CommonJS
-				}, {
-					loader: 'sass-loader' // compiles Sass to CSS
-				}
-				]
+				include: path.resolve(__dirname, 'src'),
+				exclude: /node_modules/,
+				use: 'babel-loader'
 			},
 			{
 				test: /\.css?$/,
-				include: [
-					path.resolve(__dirname, 'src')
-				],
-				exclude: [
-					path.resolve(__dirname, 'node_modules'),
-					path.resolve(__dirname, 'build')
-				],
-				use: [{
-					loader: 'style-loader' // creates style nodes from JS strings
-				}, {
-					loader: 'css-loader' // translates CSS into CommonJS
-				}
+				include: path.resolve(__dirname, 'src'),
+				exclude: /node_modules/,
+				use: ['style-loader', 'css-loader']
+			},
+			{
+				test: /\.scss?$/,
+				include: path.resolve(__dirname, 'src'),
+				exclude: /node_modules/,
+				use: ['style-loader', 'css-loader', 'sass-loader']
+			},
+			{
+				test: /\.(gif|png|jpe?g|svg)$/i,
+				use: [
+					'file-loader',
+					{
+						loader: 'image-webpack-loader',
+						options: {
+							disable: true, // webpack@2.x and newer
+						},
+					},
 				]
-			}
+			},
 		]
 	},
+
+	plugins: [
+		new Dotenv(),
+		new HtmlWebpackPlugin({
+			template: resolve('public/index.html'),
+			inject: 'body'
+		})
+	],
 	resolve: {
-		modules: [
-			path.resolve(__dirname, 'node_modules'),
-			path.resolve(__dirname, 'src')
-		],
 		extensions: ['.js', '.jsx', '.json', '.css', '.scss'],
 		alias: {
 			// to use alias support in Webstorm we have to mark src as mark directory as resource root
@@ -113,3 +85,36 @@ module.exports = {
 	}
 
 };
+
+const devConfig = merge(common, {
+	mode: 'development',
+	devServer: {
+		host: '0.0.0.0',
+		contentBase: [path.resolve(__dirname, 'public'), path.resolve(__dirname, 'src/api/mock_api')],
+		port: process.env.PORT || 3000,
+		historyApiFallback: true,
+		hot: true,
+		inline: true
+	},
+	plugins: [
+		new webpack.HotModuleReplacementPlugin(),
+	]
+
+});
+
+const prodConfig = merge(common, {
+	mode: 'production',
+	optimization: {
+		minimizer: [
+			new UglifyJsPlugin()
+		]
+	},
+	plugins: [
+		new CopyWebpackPlugin([{
+			from: resolve('public/*'),
+			to: resolve('dist')
+		}])
+	]
+});
+
+export default dev ? devConfig : prodConfig;
