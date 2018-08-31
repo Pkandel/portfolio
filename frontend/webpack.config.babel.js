@@ -5,6 +5,7 @@ import Dotenv from 'dotenv-webpack';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 import merge from 'webpack-merge';
 
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
@@ -53,13 +54,31 @@ const common = {
 				test: /\.css?$/,
 				include: path.resolve(__dirname, 'src'),
 				exclude: /node_modules/,
-				use: ['style-loader', 'css-loader']
+				use: [
+					dev ? 'style-loader' : MiniCssExtractPlugin.loader,
+					{
+						loader: "css-loader",
+						options: {
+							sourceMap: true,
+							importLoader: 1
+						}
+					}
+				]
 			},
 			{
 				test: /\.scss?$/,
 				include: path.resolve(__dirname, 'src'),
 				exclude: /node_modules/,
-				use: ['style-loader', 'css-loader', 'sass-loader']
+				use: [
+					dev ? 'style-loader' : MiniCssExtractPlugin.loader,
+					{
+						loader: "css-loader",
+						options: {
+							sourceMap: true,
+							importLoader: 1
+						}
+					}, 'sass-loader'
+				]
 			},
 			{
 				test: /\.(gif|png|jpe?g|svg)$/i,
@@ -81,7 +100,7 @@ const common = {
 		new HtmlWebpackPlugin({
 			template: resolve('public/index.html'),
 			inject: 'body'
-		})
+		}),
 	],
 	resolve: {
 		extensions: ['.js', '.jsx', '.json', '.css', '.scss'],
@@ -118,7 +137,7 @@ const prodConfig = merge(common, {
 		minimizer: [
 			new UglifyJsPlugin({
 				sourceMap: true,
-				uglifyOptions:{
+				uglifyOptions: {
 					compress: {
 						inline: false
 					}
@@ -131,11 +150,14 @@ const prodConfig = merge(common, {
 			root: resolve()
 		}),
 		new CopyWebpackPlugin([{
-				from: resolve('public/'),
-				to: resolve('dist/'),
-				ignore: [resolve('public/index.html')]
-			},
-		])
+			from: resolve('public/'),
+			to: resolve('dist/'),
+			ignore: [resolve('public/index.html')]
+		}, ]),
+		new MiniCssExtractPlugin({
+			filename: 'styles/[name].min.css',
+			chunkFilename: 'styles/[id].min.css'
+		})
 	]
 });
 
