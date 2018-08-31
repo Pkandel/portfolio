@@ -249,10 +249,10 @@ class ReactMarkdownHightlight extends Component {
 		return (
 			<div>
 				<div className={markdownStyle} id="markdownRoot">
-					{ state && state !== 'markdown' ?  null : <MarkdownEditor /> }
-					{ state && state !== 'preview' ? null : <PreviewPanel /> }
+					{state && state !== 'markdown' ? null : <MarkdownEditor />}
+					{state && state !== 'preview' ? null : <PreviewPanel />}
 				</div>
-				{ state && <TabGroup /> }
+				{state && <TabGroup />}
 			</div>
 		);
 	}

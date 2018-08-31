@@ -4,6 +4,7 @@ import webpack from 'webpack';
 import Dotenv from 'dotenv-webpack';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 import merge from 'webpack-merge';
 
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
@@ -11,12 +12,12 @@ import {
 	BundleAnalyzerPlugin
 } from 'webpack-bundle-analyzer';
 
-// const dependencies = require('./package.json').dependencies;
-// let vendorArray = [];
-// for(const key in dependencies) {
-// 	vendorArray.push(key);
-// }
-// vendorArray = vendorArray.filter(key => key !== 'babel-polyfill');
+const dependencies = require('./package.json').dependencies;
+let vendorArray = [];
+for (const key in dependencies) {
+	vendorArray.push(key);
+}
+vendorArray = vendorArray.filter(key => key !== 'babel-polyfill');
 
 const resolve = (...args) => {
 	return path.resolve(__dirname, ...args);
@@ -27,11 +28,19 @@ console.log(`Application running in ${env} mode`);
 const dev = env === 'development';
 
 const common = {
-	entry: resolve('src'),
+	entry: {
+		app: resolve('src'),
+		vendor: vendorArray,
+	},
 	output: {
 		path: resolve('dist'),
-		filename: 'js/app.js',
+		filename: 'js/[name].min.js',
 		publicPath: '/'
+	},
+	optimization: {
+		splitChunks: {
+			chunks: 'all'
+		}
 	},
 	module: {
 		rules: [{
@@ -88,6 +97,7 @@ const common = {
 
 const devConfig = merge(common, {
 	mode: 'development',
+	devtool: 'cheap-eval-source-map',
 	devServer: {
 		host: '0.0.0.0',
 		contentBase: [path.resolve(__dirname, 'public'), path.resolve(__dirname, 'src/api/mock_api')],
@@ -106,14 +116,26 @@ const prodConfig = merge(common, {
 	mode: 'production',
 	optimization: {
 		minimizer: [
-			new UglifyJsPlugin()
+			new UglifyJsPlugin({
+				sourceMap: true,
+				uglifyOptions:{
+					compress: {
+						inline: false
+					}
+				}
+			})
 		]
 	},
 	plugins: [
+		new CleanWebpackPlugin(resolve('dist'), {
+			root: resolve()
+		}),
 		new CopyWebpackPlugin([{
-			from: resolve('public/*'),
-			to: resolve('dist')
-		}])
+				from: resolve('public/'),
+				to: resolve('dist/'),
+				ignore: [resolve('public/index.html')]
+			},
+		])
 	]
 });
 

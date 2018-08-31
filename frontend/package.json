@@ -10,12 +10,7 @@
     "run:server": "./node_modules/.bin/webpack-dev-server",
     "lint:watch": "npm run lint --watch",
     "watch:css": "node-sass src/ -o src/ --watch --recursive",
-    "clean-dist": "npm run remove-dist && mkdir dist",
-    "remove-dist": "node_modules/.bin/rimraf dist",
-    "build:html": "babel-node tools/buildHtml.js",
-    "preprod": "npm-run-all clean-dist build:html",
-    "prod": " babel-node tools/build.js",
-    "postprod": "NODE_ENV=production babel-node tools/prodServer.js"
+    "build": " webpack -p"
   },
   "repository": {
     "type": "git",
@@ -58,6 +53,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
     "colors": "^1.1.2",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.4",
