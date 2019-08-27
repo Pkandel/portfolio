@@ -4,7 +4,7 @@
   "description": "The note-taking-app backend written in nodejs.",
   "main": "api/index.js",
   "scripts": {
-    "dev": "nodemon api/index.js --exec babel-node",
+    "dev": "./node_modules/.bin/nodemon ./api/index.js --exec babel-node",
     "debug": "nodemon --inspect api/index --exec babel-node",
     "clean": "rm -rf build && mkdir build",
     "build-server": "babel api  --out-dir build",

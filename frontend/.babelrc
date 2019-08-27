@@ -1,19 +1,10 @@
 {
     "sourceMaps": true,
     "presets": [
-      ["es2015", {"loose": true}],
-      "stage-0",
-      "react"
+      "@babel/preset-env",
+      "@babel/preset-react"
     ],
-    "env": {
-      "development": {
-        "plugins": [
-          "add-module-exports",
-          "transform-object-rest-spread"
-        ]
-      },
-      "production": {
-        "presets": []
-      }
-    }
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
   }

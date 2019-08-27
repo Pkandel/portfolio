@@ -9,7 +9,7 @@ class Router extends Component {
 			<Switch>
 				<Route exact path="/admin" component={Home} />
 				<Route exact path="/admin/about" component={About} />
-				<Route path="/admin/*" component={Home} />
+				<Route path="/admin*" component={Home} />
 			</Switch>
 		);
 	}

@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import path from  'path';
 import webpack from  'webpack';
-import Dotenv from  'dotenv-webpack';
 import LodashModuleReplacementPlugin from  'lodash-webpack-plugin';
 import ExtractTextPlugin from  'extract-text-webpack-plugin';
 import CopyWebpackPlugin from  'copy-webpack-plugin';
@@ -17,7 +16,6 @@ const dev = env === 'development';
 module.exports = {
 	entry: dev
 		? [
-			'webpack-hot-middleware/client?reload=true',
 			'react-hot-loader/patch',
 			path.resolve(__dirname, 'src')
 		] : path.resolve(__dirname, 'src'),
@@ -27,8 +25,15 @@ module.exports = {
 		publicPath: '/'
 	},
 	devServer: {
-		contentBase: path.resolve(__dirname, dev ? 'src' : 'dist')
-
+		contentBase: [
+			path.resolve(__dirname, 'public'),
+			path.resolve(__dirname, 'src'),
+		],
+		port: 9000,
+		host: '0.0.0.0',
+		hot: true,
+		hotOnly: true,
+		historyApiFallback: true,
 	},
 	target: 'web',
 	devtool: dev ? 'cheap-module-inline-source-map' : 'source-map',
@@ -39,7 +44,6 @@ module.exports = {
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('development')
 		}),
-		new Dotenv()
 
 	] : [
 		new webpack.optimize.OccurrenceOrderPlugin(),
@@ -51,7 +55,6 @@ module.exports = {
 		new CopyWebpackPlugin([
 			{ from: 'public/', to: './' }
 		]),
-		new Dotenv()
 	],
 	module: {
 		rules: [
@@ -69,11 +72,8 @@ module.exports = {
 			{
 				test: /\.scss?$/,
 				include: [
-					path.resolve(__dirname, 'src')
-				],
-				exclude: [
-					path.resolve(__dirname, 'node_modules'),
-					path.resolve(__dirname, 'build')
+					path.resolve(__dirname, 'src'),
+					path.resolve(__dirname, 'node_modules/'),
 				],
 				use: [{
 					loader: 'style-loader' // creates style nodes from JS strings
@@ -87,11 +87,8 @@ module.exports = {
 			{
 				test: /\.css?$/,
 				include: [
-					path.resolve(__dirname, 'src')
-				],
-				exclude: [
-					path.resolve(__dirname, 'node_modules'),
-					path.resolve(__dirname, 'build')
+					path.resolve(__dirname, 'src'),
+					path.resolve(__dirname, 'node_modules/'),
 				],
 				use: [{
 					loader: 'style-loader' // creates style nodes from JS strings

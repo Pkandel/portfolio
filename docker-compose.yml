@@ -14,6 +14,7 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend/src/:/usr/src/app/src
+      - ./frontend/webpack.config.babel.js:/usr/src/app/webpack.config.babel.js
   backend:
     build:
       context: ./backend/
@@ -32,4 +33,6 @@ services:
     links:
       - mongo:mongo
     volumes:
-      - ./backend/:/app
+      - ./backend/api:/app/api
+      - ./backend/config:/app/config
+      - ./backend/public:/app/public
