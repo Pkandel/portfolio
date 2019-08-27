@@ -29,7 +29,7 @@ module.exports = {
 			path.resolve(__dirname, 'public'),
 			path.resolve(__dirname, 'src'),
 		],
-		port: 9000,
+		port: 3000,
 		host: '0.0.0.0',
 		hot: true,
 		hotOnly: true,

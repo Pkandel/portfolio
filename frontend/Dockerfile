@@ -1,4 +1,4 @@
-FROM node:boron
+FROM node:latest
 MAINTAINER Prakash Kandel <unique_prakash2002@yahoo.com>
 # Create app directory
 RUN mkdir -p /usr/src/app
@@ -12,4 +12,4 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 
 EXPOSE 3000
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "start" ]
