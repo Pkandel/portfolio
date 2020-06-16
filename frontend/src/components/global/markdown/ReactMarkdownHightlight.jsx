@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import hljs from 'highlight.js';
+import './theme.scss';
 import './ReactMarkdownHightlight.scss';
 
 const showdown = require('showdown');
@@ -95,6 +96,24 @@ class ReactMarkdownHightlight extends Component {
 > Code Refactor
 		
 - optimise the click handler function
+
+## Code highlighting
+\`\`\`js
+	 handleChange = (e) => {
+		this.setState({
+			markdown: e.target.value,
+			html: this.converter.makeHtml(e.target.value)
+		}, () => {
+			const code = document.querySelectorAll('code');
+			if (code.length) {
+				code.forEach(c => {
+					hljs.highlightBlock(c);
+				});
+			}
+		}
+		);
+	}
+\`\`\`
 	`;
 		this.setState({
 			markdown,
@@ -225,17 +244,11 @@ class ReactMarkdownHightlight extends Component {
 			</div>
 		);
 	}
-	TabGroup = () => {
-		return (
-			<div className="tab">
-				<button className="tab-button" onClick={() => this.handleToggle('preview')}>Preview</button>
-				<button className="tab-button" onClick={() => this.handleToggle('markdown')}>Code</button>
-			</div>);
-	}
 
 	PreviewPanel = () => {
+		const theme  = 'atom-one-light';
 		return (
-			<div className="markdown-preview">
+			<div className={`markdown-preview ${theme}`}>
 				<div className="preview-head"> Preview </div>
 				<div dangerouslySetInnerHTML={{ __html: `${this.state.html}` }} className="preview-content" />
 			</div>
@@ -245,14 +258,13 @@ class ReactMarkdownHightlight extends Component {
 		const { state } = this.state;
 		const { previewStyle } = this.props;
 		const markdownStyle = `markdown-root preview-${previewStyle}`;
-		const { MarkdownEditor, TabGroup, PreviewPanel } = this;
+		const { MarkdownEditor, PreviewPanel } = this;
 		return (
 			<div>
 				<div className={markdownStyle} id="markdownRoot">
-					{state && state !== 'markdown' ? null : <MarkdownEditor />}
-					{state && state !== 'preview' ? null : <PreviewPanel />}
+					<MarkdownEditor />
+					<PreviewPanel />
 				</div>
-				{state && <TabGroup />}
 			</div>
 		);
 	}

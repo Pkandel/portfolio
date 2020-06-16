@@ -3,237 +3,272 @@
     margin: auto;
     margin-top: 50px;
     min-height: 400px;
-    max-height: 80vh;
     border-radius: 6px;
     border: 1px solid #ddd;
     // this is for default 
-    display: flex; 
+    display: flex;
     flex-direction: row;
+
     div {
         flex: 1;
     }
+
     &:hover {
-    box-shadow: 0px 1px 1px 1px;
+        box-shadow: 0px 1px 1px 1px;
     }
 
-        // supporting css
+    // supporting css
 
-        li {
-            display: list-item;
-        }
-        img[alt$=">"] {
-            float:right;
-          }
-          
-          img[alt$="<"] {
-            float:left;
-          }
-          
-          img[alt$="<>"] {
-              display: block;
-              max-width: 100%;
-              height: auto;
-              margin: auto;
-              float: none!important;
-          }
-          *:not(pre) {
-            code {
-                 color: #c7254e !important;
-                 background-color: #f9f2f4;
-                 border-radius: 4px;
-                 padding: 2px;
-                 display: inline;
-                 * {
-                 color: #c7254e !important;
-                 }
-              }
-          }
-          blockquote {
-            background: #eee;
-            line-height: 40px;
-            padding-left: 15px;
-            // border-left: 5px solid #2a2a;
-        }
-    
-          table {
-            width: 100%;
-            max-width: 100%;
-            margin-bottom: 1rem;
-            background-color: transparent;
-            box-shadow: 0px 2px 1px 2px;
-            thead {
-                th {
-                    vertical-align: bottom;
-                    border-bottom: 2px solid #dee2e6;
-                }
-            }
-            th,
-            td {
-                padding: 0.75rem;
-                vertical-align: top;
-                border-top: 1px solid #dee2e6;
-            }
-            tbody {
-                border-top: 2px solid #dee2e6;
-                tr:nth-of-type(odd) {
-                    background-color: rgba(0, 0, 0, 0.05);
-                }
-                tr:nth-of-type(even) {
-                    background-color: rgba(255, 255, 255, 0.05);
-                }
-                tr {
-                    &:hover {
-                        background-color: rgba(0, 0, 0, 0.075);
-                    }
-                }
-            }
-        }
-    
-    
+    li {
+        display: list-item;
     }
-    .markdown-editor {
-        .icon {
+
+    img[alt$=">"] {
+        float: right;
+    }
+
+    img[alt$="<"] {
+        float: left;
+    }
+
+    img[alt$="<>"] {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: auto;
+        float: none !important;
+    }
+
+    *:not(pre)>code.hljs {
+        color: #c7254e;
+        background-color: #f9f2f4;
+        border-radius: 4px;
+        padding: 2px;
+        display: inline;
+
+        * {
+            color: #c7254e;
+        }
+    }
+
+    blockquote {
+        background: #eee;
+        line-height: 40px;
+        padding-left: 15px;
+        border-left: 5px solid #2a2a;
+    }
+
+    table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        background-color: transparent;
+        box-shadow: 0px 2px 1px 2px;
+
+        thead {
+            th {
+                vertical-align: bottom;
+                border-bottom: 2px solid #dee2e6;
+            }
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+
+        tbody {
+            border-top: 2px solid #dee2e6;
+
+            tr:nth-of-type(odd) {
+                background-color: rgba(0, 0, 0, 0.05);
+            }
+
+            tr:nth-of-type(even) {
+                background-color: rgba(255, 255, 255, 0.05);
+            }
+
+            tr {
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.075);
+                }
+            }
+        }
+    }
+
+
+}
+
+.markdown-editor {
+    .icon {
+        background: #eee;
+        height: 30px;
+        padding-left: 12px;
+        border-bottom: 1px solid #aaa;
+        cursor: pointer;
+
+        i {
+            margin-right: 15px;
+
+            &:hover {
+                color: blueviolet;
+            }
+        }
+
+        img {
+            width: 18px;
+            height: 14px;
+            margin-bottom: 5px;
+        }
+
+        .heading-dropdown {
+            position: absolute;
             background: #eee;
-            height: 30px;
-            padding-left: 12px;
-            border-bottom: 1px solid #aaa;
-            cursor: pointer;
-            i {
-                margin-right: 15px;
+            margin-left: -12px;
+            padding: 0px 10px;
+            margin-top: 2px;
+            padding-bottom: 5px;
+            height: auto;
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                margin-top: 0;
+                margin-bottom: 0;
+
                 &:hover {
                     color: blueviolet;
                 }
             }
-            img {
-                width: 18px;
-                height: 14px;
-                margin-bottom: 5px;
+
+            .h1 {
+                font-size: 20px;
             }
-            .heading-dropdown {
-                position: absolute;
-                background: #eee;
-                margin-left: -12px;
-                padding: 0px 10px;
-                margin-top: 2px;
-                padding-bottom: 5px;
-                height: auto;
-    
-                h1,
-                h2,
-                h3,
-                h4 {
-                    margin-top: 0;
-                    margin-bottom: 0;
-                    &:hover {
-                        color: blueviolet;
-                    }
-                }
-                .h1 {
-                    font-size: 20px;
-                }
-                .h2 {
-                    font-size: 18px;
-                }
+
+            .h2 {
+                font-size: 18px;
             }
-        }
-        textarea {
-            padding: 8px 12px;
-            width: 100%;
-            height: auto;
-            min-height: calc(100% - 30px);
-            border: none;
-            resize: none;
-            margin-top: 0px;
-            margin-bottom: 0px;
-            outline: none;
         }
     }
-    .markdown-preview {
-        min-height: calc(100% - 30px);
+
+    textarea {
+        padding: 8px 12px;
         width: 100%;
         height: auto;
-        overflow: auto;
-        border-left: 2px solid #eee;
-        .preview-head {
-            background: #eee;
-            height: 30px;
-            width: 100%;
-            padding-left:12px;
-            height: 30px;
-            border-bottom: 1px solid #aaa;
-        }
-        .preview-content {
-            overflow: auto;
-            padding: 6px 8px;
-            width: 100%;
-        }
+        min-height: calc(100% - 30px);
+        border: none;
+        resize: none;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        outline: none;
     }
+}
+
+.markdown-preview {
+    min-height: calc(100% - 30px);
+    width: 100%;
+    height: auto;
+    overflow: auto;
+    border-left: 2px solid #eee;
+
+    .preview-head {
+        background: #eee;
+        height: 30px;
+        width: 100%;
+        padding-left: 12px;
+        height: 30px;
+        border-bottom: 1px solid #aaa;
+    }
+
+    .preview-content {
+        overflow: auto;
+        padding: 6px 8px;
+        width: 100%;
+    }
+}
 
 
 .preview-tab {
-   display: block;
-   overflow: auto;
+    display: block;
+    overflow: auto;
+
     .markdown-editor {
         min-height: 80vh;
+
         textarea {
             min-height: 75vh;
         }
     }
+
     .markdown-preview {
         min-height: 80vh;
+
         .preview-content {
-          min-height: 80vh;
+            min-height: 80vh;
         }
     }
 
 }
+
 .tab {
     text-align: right;
     width: 90%;
-    margin:auto;
+    margin: auto;
+
     .tab-button {
         cursor: pointer;
         background: #eee;
         padding: 4px 6px;
         outline: none;
+
         &:hover {
 
             box-shadow: 0px 4px 4px #ccc;
         }
     }
 }
+
 .preview-horizontal {
-    width:80%;
-    display: flex; 
+    width: 80%;
+    display: flex;
     flex-direction: column;
     max-height: 90vh;
+
     div {
         flex: 1;
+    }
+
+    .markdown-editor {
+        textarea {
+            min-height: 400px;
         }
-        .markdown-editor {
-            textarea {
-                min-height: 400px;
-            }
+    }
+
+    .markdown-preview {
+        min-height: 400px;
+        overflow: auto;
+
+        .preview-head {
+            position: absolute;
+            width: 79.5%;
         }
-        .markdown-preview {
+
+        .preview-content {
+            margin-top: 20px;
             min-height: 400px;
             overflow: auto;
-            .preview-head {
-                position: absolute;
-                width: 79.5%;
-            }
-            .preview-content {
-                margin-top: 20px;
-                min-height: 400px;
-                overflow: auto;
-            }
         }
+    }
 }
-.preview-vertical {
-        display: flex; 
-        flex-direction: row;
 
-        div {
-            flex: 1;
-        }
+.preview-vertical {
+    display: flex;
+    flex-direction: row;
+
+    div {
+        flex: 1;
+    }
 }

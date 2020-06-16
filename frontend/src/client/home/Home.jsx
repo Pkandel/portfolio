@@ -9,7 +9,7 @@ class Home extends Component {
 	
 	render() {
 		
-		return <Markdown previewStyle="tab"/>;
+		return <Markdown previewStyle="vertical"/>;
 
 	}
 }
