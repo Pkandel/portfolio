@@ -1,0 +1,16 @@
+.anticon {
+    &::before {
+        content: "";
+    }
+
+    &::after {
+        content: "";
+    }
+}
+
+.ant-collapse-header {
+    display: grid;
+    grid-template-columns: 20px auto;
+    grid-column-gap: 10px;
+    align-items: center;
+}
